@@ -9,7 +9,7 @@ function Header() {
     <>
       <div className="header">
         <div className="search d-flex align-items-center gap-2">
-          <div className="searching-wrap">
+          {/* <div className="searching-wrap">
             <Form.Control
               type="text"
               placeholder="Search"
@@ -53,7 +53,7 @@ function Header() {
               </div>
               <div className="number">15</div>
             </Nav.Link>
-          </div>
+          </div> */}
           <div className="profile">
             <div className="photo">
               <img src={userIcon} alt="Admin logo" />
