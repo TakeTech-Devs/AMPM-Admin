@@ -1,0 +1,14 @@
+@import "./Variable.scss";
+*{box-sizing: border-box;margin: 0;padding: 0;}
+/* Typography */
+body{font-family: $mainFamily;margin: 0;}
+h1{font-weight: $bold;line-height: 68.26px;color: #FFFFFF;font-size: $head;margin: 0;padding: 0;}
+h2{font-size: $subHead;font-weight: $bold;color: $primary;line-height: 46px;margin: 0;padding: 0;}
+h3{font-size: $cardTitle;font-weight: $bold;color: $primary;line-height: 20px;margin: 0;padding: 0;}
+p{font-size: $base;font-weight: $regular;color: $black;line-height: 30px;margin: 0;padding: 0;}
+ul{list-style: none;}
+ul li .nav-link{color: $baseColor;padding: 0;}
+header,footer{width: 100%;}
+img{height: 100%; width: 100%; object-fit: contain;}
+svg{height: 100%; width: 100%;}
+a{text-decoration: none;}
