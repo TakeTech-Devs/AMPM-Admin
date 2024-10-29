@@ -3,8 +3,12 @@ import { Nav, Form, Button } from "react-bootstrap";
 import "../styles/Dashboard.scss";
 import "../styles/Global.scss";
 import userIcon from "../assets/user.png";
+import { useDispatch, useSelector } from "react-redux";
 
 function Header() {
+
+  const {user, loading, isAuthenticated} = useSelector((state) => state.adminLogin);
+
   return (
     <>
       <div className="header">
@@ -59,7 +63,7 @@ function Header() {
               <img src={userIcon} alt="Admin logo" />
             </div>
             <div className="details ">
-              <h4>Admin</h4>
+              <h4>{user ? user.name : "Loading..."}</h4>
               <p>Founder</p>
             </div>
           </div>

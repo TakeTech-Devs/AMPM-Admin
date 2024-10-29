@@ -2,9 +2,23 @@ import React from "react";
 import "../styles/Dashboard.scss";
 import "../styles/Global.scss";
 import companyLogo from "../assets/company-logo.png";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../Actions/AdminAction";
 
 function Sidebar() {
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    dispatch(logout());
+    window.alert("Logged Out Successfully");
+    // navigate("/login");
+    window.location.href = "/login";
+
+  };
+
   return (
     <>
       <div className="sidebar">
@@ -97,9 +111,18 @@ function Sidebar() {
               </div>
               <NavLink to="/admins" eventKey="link-event-key">Admins</NavLink>
             </li>
+            <li>
+              <div className="icon1 d-flex align-items-center justify-content-center">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="25" height="25" fill="none">
+                  <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-6 8v-2c0-2.67 5.33-4 6-4s6 1.33 6 4v2H6z" fill="#47ad01" />
+                </svg>
+              </div>
+              <NavLink onClick={handleLogout} eventKey="link-event-key">Logout</NavLink>
+            </li>
           </ul>
         </div>
       </div>
+      {/* <button onClick={handleLogout}> Logout</button> */}
     </>
   );
 }

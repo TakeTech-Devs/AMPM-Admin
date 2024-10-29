@@ -1,7 +1,31 @@
-import React from 'react';
-import '../styles/Login.scss'; 
+import React, { useState } from 'react';
+import '../styles/Login.scss';
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { adminLogin } from '../Actions/AdminAction';
 
 function Login() {
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const { user, error, loading, isAuthenticated } = useSelector((state) => state.adminLogin);
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(adminLogin(email, password));
+    // window.location.href = '/'
+
+    // setTimeout(() => {
+    //   window.location.reload();
+    // }, 250); // 1 second delay
+  };
+
+
+
   return (
     <div className="login-container">
       <div className="container">
@@ -15,14 +39,14 @@ function Login() {
               ADMIN PANEL
             </div>
             <div className="login-form">
-              <form>
+              <form onSubmit={handleSubmit}>
                 <div className="form-group">
                   <label className="form-control-label">EMAIL</label>
-                  <input type="text" className="form-control" />
+                  <input type="text" className="form-control" value={email} onChange={(e) => setEmail(e.target.value)} />
                 </div>
                 <div className="form-group">
                   <label className="form-control-label">PASSWORD</label>
-                  <input type="password" className="form-control" />
+                  <input type="password" className="form-control" value={password} onChange={(e) => setPassword(e.target.value)} />
                 </div>
                 <div className="loginbttm">
                   <div className="login-text"></div>

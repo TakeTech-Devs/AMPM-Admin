@@ -1,5 +1,5 @@
-import React from "react";
-import { Routes, Route, useLocation } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import "../styles/Dashboard.scss";
 import "../styles/Global.scss";
 import Home from "../pages/Home";
@@ -11,10 +11,23 @@ import Resellers from "../pages/Resellers";
 import Orders from "../pages/Orders";
 import Login from "../pages/Login";
 import { Admins } from "../pages/Admins";
+import { useSelector } from "react-redux";
 
 function Main() {
   const location = useLocation();
   const isLoginRoute = location.pathname === "/login";
+
+  const { isAuthenticated} = useSelector((state) => state.adminLogin);
+
+  if (isAuthenticated && isLoginRoute) {
+    return <Navigate to="/" />;
+  }
+
+  // Redirect to login if not authenticated and not on login page
+  if (!isAuthenticated && !isLoginRoute) {
+    return <Navigate to="/login" />;
+  }
+  
 
   return (
     <div className={`main ${isLoginRoute ? "login-main-show" : ""}`}>
