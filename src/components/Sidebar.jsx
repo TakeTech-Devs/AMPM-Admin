@@ -29,7 +29,7 @@ function Sidebar() {
         </div>
         <div className="menu">
           <ul>
-            <NavLink to="/" eventKey="link-event-key" className="sidebar-link" activeClassName="active">
+          <NavLink to="/" className={({ isActive }) => isActive ? "sidebar-link active" : "sidebar-link"}>
               <li className="d-flex align-items-center">
                 <div className="icon1">
                   <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="none">
@@ -39,7 +39,7 @@ function Sidebar() {
                 Home
               </li>
             </NavLink>
-            <NavLink to="/aboutus" eventKey="link-event-key" className="sidebar-link" activeClassName="active">
+            <NavLink to="/aboutus" className={({ isActive }) => isActive ? "sidebar-link active" : "sidebar-link"}>
               <li className="d-flex align-items-center">
                 <div className="icon1">
                   <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="none">
@@ -52,7 +52,7 @@ function Sidebar() {
                 About Us
               </li>
             </NavLink>
-            <NavLink to="/product" eventKey="link-event-key" className="sidebar-link" activeClassName="active">
+            <NavLink to="/product" className={({ isActive }) => isActive ? "sidebar-link active" : "sidebar-link"}>
               <li>
                 <div className="icon1 d-flex align-items-center justify-content-center">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="25" height="25" fill="none">
@@ -62,7 +62,7 @@ function Sidebar() {
                 Product
               </li>
             </NavLink>
-            <NavLink to="/contact" eventKey="link-event-key" className="sidebar-link" activeClassName="active">
+            <NavLink to="/contact" className={({ isActive }) => isActive ? "sidebar-link active" : "sidebar-link"}>
               <li>
                 <div className="icon1 d-flex align-items-center justify-content-center">
                   <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 40 40" fill="none">
@@ -72,7 +72,7 @@ function Sidebar() {
                 Contact
               </li>
             </NavLink>
-            <NavLink to="/consumers" eventKey="link-event-key" className="sidebar-link" activeClassName="active">
+            <NavLink to="/consumers" className={({ isActive }) => isActive ? "sidebar-link active" : "sidebar-link"}>
               <li>
                 <div className="icon1 d-flex align-items-center justify-content-center">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="25" height="25" fill="none">
@@ -82,7 +82,7 @@ function Sidebar() {
               Consumers
               </li>
             </NavLink>
-            <NavLink to="/resellers" eventKey="link-event-key" className="sidebar-link" activeClassName="active">
+            <NavLink to="/resellers" className={({ isActive }) => isActive ? "sidebar-link active" : "sidebar-link"}>
               <li>
                 <div className="icon1 d-flex align-items-center justify-content-center">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="25" height="25" fill="none">
@@ -92,7 +92,7 @@ function Sidebar() {
               Resellers
               </li>
             </NavLink>
-            <NavLink to="/orders" eventKey="link-event-key" className="sidebar-link" activeClassName="active">
+            <NavLink to="/orders" className={({ isActive }) => isActive ? "sidebar-link active" : "sidebar-link"}>
               <li>
                 <div className="icon1 d-flex align-items-center justify-content-center">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="25" height="25" fill="none">
@@ -102,7 +102,7 @@ function Sidebar() {
               Orders
               </li>
             </NavLink>
-            <NavLink to="/admins" eventKey="link-event-key" className="sidebar-link" activeClassName="active">
+            <NavLink to="/admins" className={({ isActive }) => isActive ? "sidebar-link active" : "sidebar-link"}>
               <li>
                 <div className="icon1 d-flex align-items-center justify-content-center">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="25" height="25" fill="none">
@@ -112,7 +112,7 @@ function Sidebar() {
               Admins
               </li>
             </NavLink>
-            <NavLink onClick={handleLogout} eventKey="link-event-key" className="sidebar-link" activeClassName="active">
+            <NavLink onClick={handleLogout} eventKey="link-event-key" className="sidebar-link logout">
               <li>
                 <div className="icon1 d-flex align-items-center justify-content-center">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="25" height="25" fill="none">
