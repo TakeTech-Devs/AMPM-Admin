@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Form, Container, Row, Col, Button, Table } from "react-bootstrap";
 import "../styles/Dashboard.scss";
 import "../styles/Global.scss";
 import { useDispatch, useSelector } from 'react-redux';
-import { clearErrors, getAbout } from '../Actions/AboutActions';
+import { clearErrors, createAboutHeader, createAboutMission, createAboutWeDo, getAbout } from '../Actions/AboutActions';
+import { ADD_ABOUTHEADER_ADMIN_RESET, ADD_ABOUTMISSION_ADMIN_RESET, ADD_ABOUTWEDO_ADMIN_RESET } from '../Constants/AboutConstants';
 
 function Aboutus() {
 
@@ -17,8 +18,94 @@ function Aboutus() {
     if (error) {
       alert(error);
       dispatch(clearErrors());
+    }
+  }, [dispatch, error]);
+
+  const { about: newAbout, isUpdated, error: aboutError, } = useSelector(state => state.newAboutData);
+
+  const [headerData, setHeaderData] = useState({
+    headerTitle: '',
+    headerDescription: '',
+  })
+
+  const [missionData, setMissionData] = useState({
+    ourMissionTitle: '',
+    ourMissionDescription: '',
+  })
+
+
+  const [weDoData, setWeDoData] = useState({
+    weDoTitle: '',
+    weDoDescription: '',
+  })
+
+
+  useEffect(() => {
+    if (newAbout) {
+      setHeaderData({
+        headerTitle: newAbout.headerTitle,
+        headerDescription: newAbout.headerDescription,
+      })
+      setMissionData({
+        ourMissionTitle: newAbout.ourMissionTitle,
+        ourMissionDescription: newAbout.ourMissionDescription,
+      })
+      setWeDoData({
+        weDoTitle: newAbout.weDoTitle,
+        weDoDescription: newAbout.weDoDescription,
+      })
+    }
+
+    if (isUpdated) {
+      window.alert('Home Data Updated Successfully');
+      dispatch({ type: ADD_ABOUTHEADER_ADMIN_RESET });
+      dispatch({ type: ADD_ABOUTMISSION_ADMIN_RESET });
+      dispatch({ type: ADD_ABOUTWEDO_ADMIN_RESET });
+      window.location.reload()
+    }
+
+    if (aboutError) {
+      window.alert(aboutError);
+      dispatch(clearErrors());
+    }
+  }, [newAbout, isUpdated, aboutError, dispatch])
+
+
+  const handelHeaderInput = (e) => {
+    setHeaderData({
+      ...headerData,
+      [e.target.name]: e.target.value,
+    });
   }
-}, [dispatch, error]);
+
+  const handelHeaderInputSubmit = (e) => {
+    e.preventDefault();
+    dispatch(createAboutHeader(headerData));
+  }
+
+  const handelMissionInput = (e) => {
+    setMissionData({
+      ...missionData,
+      [e.target.name]: e.target.value,
+    });
+  }
+
+  const handelMissionInputSubmit = (e) => {
+    e.preventDefault();
+    dispatch(createAboutMission(missionData));
+  }
+
+  const handelWeDoInput = (e) => {
+    setWeDoData({
+      ...weDoData,
+      [e.target.name]: e.target.value,
+    });
+  }
+
+  const handelWeDoInputSubmit = (e) => {
+    e.preventDefault();
+    dispatch(createAboutWeDo(weDoData));
+  }
 
 
   return (
@@ -27,16 +114,18 @@ function Aboutus() {
         <h3>Banner Section</h3>
         <Container>
           <Row>
-            <Col lg={4}>
-              <Form.Control type="text" placeholder="Normal text" />
-            </Col>
-            <Col lg={4}>
-              <Form.Control type="text" placeholder="Normal text" />
-            </Col>
-            <Col xs={12} className=" d-flex justify-content-end gap-2">
-              <Button variant="danger">Cancel</Button>
-              <Button variant="success">Submit</Button>
-            </Col>
+            <Form onSubmit={handelHeaderInputSubmit}>
+              <Col lg={4}>
+                <Form.Control type="text" placeholder="Normal text" name='headerTitle' value={headerData.headerTitle} onChange={handelHeaderInput} />
+              </Col>
+              <Col lg={4}>
+                <Form.Control as="textarea" placeholder="Normal text" name='headerDescription' value={headerData.headerDescription} onChange={handelHeaderInput} />
+              </Col>
+              <Col xs={12} className=" d-flex justify-content-end gap-2">
+                <Button variant="danger">Cancel</Button>
+                <Button variant="success" type='submit'>Submit</Button>
+              </Col>
+            </Form>
           </Row>
           <Table bordered hover responsive>
             <thead>
@@ -50,7 +139,7 @@ function Aboutus() {
                 <td>{about.headerTitle}</td>
                 <td>{about.headerDescription}</td>
               </tr> */}
-               {about && about.headerTitle ? (
+              {about && about.headerTitle ? (
                 <tr>
                   <td>{about.headerTitle}</td>
                   <td>{about.headerDescription}</td>
@@ -68,16 +157,18 @@ function Aboutus() {
         <h3>Our Mission</h3>
         <Container>
           <Row>
-            <Col lg={4}>
-              <Form.Control type="text" placeholder="Normal text" />
-            </Col>
-            <Col lg={4}>
-              <Form.Control type="text" placeholder="Normal text" />
-            </Col>
-            <Col xs={12} className=" d-flex justify-content-end gap-2">
-              <Button variant="danger">Cancel</Button>
-              <Button variant="success">Submit</Button>
-            </Col>
+            <Form onSubmit={handelMissionInputSubmit}>
+              <Col lg={4}>
+                <Form.Control type="text" placeholder="Normal text" name='ourMissionTitle' value={missionData.ourMissionTitle} onChange={handelMissionInput}/>
+              </Col>
+              <Col lg={4}>
+                <Form.Control as="textarea" placeholder="Normal text" name='ourMissionDescription' value={missionData.ourMissionDescription} onChange={handelMissionInput}/>
+              </Col>
+              <Col xs={12} className=" d-flex justify-content-end gap-2">
+                <Button variant="danger">Cancel</Button>
+                <Button variant="success" type='submit'>Submit</Button>
+              </Col>
+            </Form>
           </Row>
           <Table bordered hover responsive>
             <thead>
@@ -109,16 +200,18 @@ function Aboutus() {
         <h3>What We Do</h3>
         <Container>
           <Row>
+            <Form onSubmit={handelWeDoInputSubmit}>
             <Col lg={4}>
-              <Form.Control type="text" placeholder="Normal text" />
+              <Form.Control type="text" placeholder="Normal text" name='weDoTitle' value={weDoData.weDoTitle} onChange={handelWeDoInput}/>
             </Col>
             <Col lg={4}>
-              <Form.Control type="text" placeholder="Normal text" />
+              <Form.Control as="textarea" placeholder="Normal text" name='weDoDescription' value={weDoData.weDoDescription} onChange={handelWeDoInput}/>
             </Col>
             <Col xs={12} className=" d-flex justify-content-end gap-2">
               <Button variant="danger">Cancel</Button>
-              <Button variant="success">Submit</Button>
+              <Button variant="success" type='submit'>Submit</Button>
             </Col>
+            </Form>
           </Row>
           <Table bordered hover responsive>
             <thead>

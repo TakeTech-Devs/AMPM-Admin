@@ -1,9 +1,9 @@
 import { legacy_createStore as createStore, combineReducers, applyMiddleware } from 'redux';
 import {thunk} from 'redux-thunk';
 import { composeWithDevTools } from '@redux-devtools/extension';
-import { homeReducer } from './Reducers/HomeReducer';
-import { aboutReducer } from './Reducers/AboutReducer';
-import { contactReducer } from './Reducers/ContactReducer';
+import { homeReducer, newHomeData } from './Reducers/HomeReducer';
+import { aboutReducer, newAboutData } from './Reducers/AboutReducer';
+import { contactReducer, newContactData } from './Reducers/ContactReducer';
 import { consumerReducer } from './Reducers/ConsumerReducer';
 import { resellerReducer } from './Reducers/ResellerReducer';
 import { adminLoginReducer, adminReducer } from './Reducers/AdminReducer';
@@ -18,6 +18,9 @@ const reducer = combineReducers({
     adminList: adminReducer,
     adminOrders: ordersReducer,
     adminLogin: adminLoginReducer,
+    newContactData: newContactData,
+    newHomeData: newHomeData,
+    newAboutData: newAboutData,
     
 })
 

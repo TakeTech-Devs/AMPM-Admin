@@ -1,15 +1,16 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Form, Container, Row, Col, Button, Table } from "react-bootstrap";
 import "../styles/Dashboard.scss";
 import "../styles/Global.scss";
 import { useSelector, useDispatch } from 'react-redux';
-import { clearErrors, getContact } from '../Actions/ContactAction';
+import { clearErrors, createContact, getContact } from '../Actions/ContactAction';
+import { ADD_CONTACT_ADMIN_RESET } from '../Constants/ContactConstants';
 
 const Contact = () => {
 
     const dispatch = useDispatch();
 
-    const { contactInfo, loading, error } = useSelector(state => state.adminContact);getContact
+    const { contactInfo, loading, error } = useSelector(state => state.adminContact); getContact
 
     useEffect(() => {
         dispatch(getContact());
@@ -20,22 +21,70 @@ const Contact = () => {
         }
     }, [dispatch, error]);
 
+    const { contact: addContact, error: newHomeDataError, isUpdated, loading: updateLoading } = useSelector(state => state.newContactData);
+
+    const [headerData, setHeaderData] = useState({
+        headerTitle: '',
+        headerDescription: '',
+        Landline: '',
+        Mobile: '',
+        Email: '',
+    })
+
+    useEffect(() => {
+        if (addContact) {
+            setHeaderData({
+                headerTitle: addContact.headerTitle,
+                headerDescription: addContact.headerDescription,
+                Landline: addContact.Landline,
+                Mobile: addContact.Mobile,
+                Email: addContact.Email
+            })
+        }
+
+        if (isUpdated) {
+            window.alert('Section updated successfully');
+            dispatch({ type: ADD_CONTACT_ADMIN_RESET });
+            window.location.reload()
+        }
+
+        if (newHomeDataError) {
+            window.alert(newHomeDataError);
+            dispatch(clearErrors());
+        }
+    }, [addContact, isUpdated, newHomeDataError, dispatch])
+
+    const handelHeaderInput = (e) => {
+        setHeaderData({
+            ...headerData,
+            [e.target.name]: e.target.value,
+        });
+    }
+
+    const handelHeaderInputSubmit = (e) => {
+        e.preventDefault();
+        dispatch(createContact(headerData));
+    }
+
     return (
         <>
+            {updateLoading && <h4>Loading....</h4>}
             <div className="cardbox">
                 <h3>Banner Section</h3>
                 <Container>
                     <Row>
-                        <Col lg={4}>
-                            <Form.Control type="text" placeholder="Normal text" />
-                        </Col>
-                        <Col lg={4}>
-                            <Form.Control type="text" placeholder="Normal text" />
-                        </Col>
-                        <Col xs={12} className=" d-flex justify-content-end gap-2">
-                            <Button variant="danger">Cancel</Button>
-                            <Button variant="success">Submit</Button>
-                        </Col>
+                        <Form onSubmit={handelHeaderInputSubmit}>
+                            <Col lg={4}>
+                                <Form.Control type="text" placeholder="Enter New Banner Title" name='headerTitle' value={headerData.headerTitle} onChange={handelHeaderInput} />
+                            </Col>
+                            <Col lg={4}>
+                                <Form.Control as="textarea" placeholder="Enter New Banner Description" name='headerDescription' value={headerData.headerDescription} onChange={handelHeaderInput} />
+                            </Col>
+                            <Col xs={12} className=" d-flex justify-content-end gap-2">
+                                <Button variant="danger">Cancel</Button>
+                                <Button variant="success" type='submit'>Submit</Button>
+                            </Col>
+                        </Form>
                     </Row>
                     <Table bordered hover responsive>
                         <thead>
@@ -67,19 +116,21 @@ const Contact = () => {
                 <h3>Contact Information Section</h3>
                 <Container>
                     <Row>
-                        <Col lg={4}>
-                            <Form.Control type="text" placeholder="Normal text" />
-                        </Col>
-                        <Col lg={4}>
-                            <Form.Control type="text" placeholder="Normal text" />
-                        </Col>
-                        <Col lg={4}>
-                            <Form.Control type="text" placeholder="Normal text" />
-                        </Col>
-                        <Col xs={12} className=" d-flex justify-content-end gap-2">
-                            <Button variant="danger">Cancel</Button>
-                            <Button variant="success">Submit</Button>
-                        </Col>
+                        <Form onSubmit={handelHeaderInputSubmit}>
+                            <Col lg={4}>
+                                <Form.Control type="text" placeholder="Enter New Landline Number" name='Landline' value={headerData.Landline} onChange={handelHeaderInput} />
+                            </Col>
+                            <Col lg={4}>
+                                <Form.Control type="text" placeholder="Enter New Mobile Number"  name='Mobile' value={headerData.Mobile} onChange={handelHeaderInput} />
+                            </Col>
+                            <Col lg={4}>
+                                <Form.Control type="text" placeholder="Enter New Email" name='Email' value={headerData.Email} onChange={handelHeaderInput}/>
+                            </Col>
+                            <Col xs={12} className=" d-flex justify-content-end gap-2">
+                                <Button variant="danger">Cancel</Button>
+                                <Button variant="success" type='submit'>Submit</Button>
+                            </Col>
+                        </Form>
                     </Row>
                     <Table bordered hover responsive>
                         <thead>
