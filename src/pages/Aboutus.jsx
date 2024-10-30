@@ -115,10 +115,10 @@ function Aboutus() {
         <Container>
           <Row>
             <Form onSubmit={handelHeaderInputSubmit}>
-              <Col lg={4}>
+              <Col lg={12}>
                 <Form.Control type="text" placeholder="Normal text" name='headerTitle' value={headerData.headerTitle} onChange={handelHeaderInput} />
               </Col>
-              <Col lg={4}>
+              <Col lg={12}>
                 <Form.Control as="textarea" placeholder="Normal text" name='headerDescription' value={headerData.headerDescription} onChange={handelHeaderInput} />
               </Col>
               <Col xs={12} className=" d-flex justify-content-end gap-2">
@@ -158,10 +158,10 @@ function Aboutus() {
         <Container>
           <Row>
             <Form onSubmit={handelMissionInputSubmit}>
-              <Col lg={4}>
+              <Col lg={12}>
                 <Form.Control type="text" placeholder="Normal text" name='ourMissionTitle' value={missionData.ourMissionTitle} onChange={handelMissionInput}/>
               </Col>
-              <Col lg={4}>
+              <Col lg={12}>
                 <Form.Control as="textarea" placeholder="Normal text" name='ourMissionDescription' value={missionData.ourMissionDescription} onChange={handelMissionInput}/>
               </Col>
               <Col xs={12} className=" d-flex justify-content-end gap-2">
@@ -201,10 +201,10 @@ function Aboutus() {
         <Container>
           <Row>
             <Form onSubmit={handelWeDoInputSubmit}>
-            <Col lg={4}>
+            <Col lg={12}>
               <Form.Control type="text" placeholder="Normal text" name='weDoTitle' value={weDoData.weDoTitle} onChange={handelWeDoInput}/>
             </Col>
-            <Col lg={4}>
+            <Col lg={12}>
               <Form.Control as="textarea" placeholder="Normal text" name='weDoDescription' value={weDoData.weDoDescription} onChange={handelWeDoInput}/>
             </Col>
             <Col xs={12} className=" d-flex justify-content-end gap-2">

@@ -144,29 +144,29 @@ function Home() {
       <div className="cardbox">
         <h3>Banner Section</h3>
         <Container>
-          <Row>
-            <Form onSubmit={handelHeaderInputSubmit}>
-              <Col lg={4}>
+          <Form onSubmit={handelHeaderInputSubmit}>
+            <Row>
+              <Col lg={12}>
                 <Form.Control type="text" placeholder="Enter New Banner Title" name='headerTitle' value={headerData.headerTitle} onChange={handelHeaderInput} />
               </Col>
-              <Col lg={4}>
+              <Col lg={12}>
                 <Form.Control as="textarea" placeholder="Enter New Banner Description" name='headerDescription' value={headerData.headerDescription} onChange={handelHeaderInput} />
               </Col>
-              <Col lg={4}>
+              <Col lg={12}>
                 <Form.Control type="text" placeholder="Enter New Banner Point One" name='headerPointOne' value={headerData.headerPointOne} onChange={handelHeaderInput} />
               </Col>
-              <Col lg={4}>
+              <Col lg={12}>
                 <Form.Control type="text" placeholder="Enter New Banner Point Two" name='headerPointTwo' value={headerData.headerPointTwo} onChange={handelHeaderInput} />
               </Col>
-              <Col lg={4}>
+              <Col lg={12}>
                 <Form.Control type="text" placeholder="Enter New Banner Point Three" name='headerPointThree' value={headerData.headerPointThree} onChange={handelHeaderInput} />
               </Col>
               <Col xs={12} className=" d-flex justify-content-end gap-2">
                 <Button variant="danger">Cancel</Button>
                 <Button variant="success" type="submit">Submit</Button>
               </Col>
-            </Form>
-          </Row>
+            </Row>
+          </Form>
           <Table bordered hover responsive>
             <thead>
               <tr>
@@ -205,23 +205,23 @@ function Home() {
       <div className="cardbox">
         <h3>Banner Bottom Cards Section</h3>
         <Container>
-          <Row>
-            <Form onSubmit={handelHeaderCardInputSubmit}>
-              <Col lg={4}>
+          <Form onSubmit={handelHeaderCardInputSubmit}>
+            <Row>
+              <Col lg={12}>
                 <Form.Control as="textarea" placeholder="Enter New Text" name='highlightOne' value={headerCardData.highlightOne} onChange={handelHeaderCardInput} />
               </Col>
-              <Col lg={4}>
+              <Col lg={12}>
                 <Form.Control as="textarea" placeholder="Enter New Text" name='highlightTwo' value={headerCardData.highlightTwo} onChange={handelHeaderCardInput} />
               </Col>
-              <Col lg={4}>
+              <Col lg={12}>
                 <Form.Control as="textarea" placeholder="Enter New Text" name='highlightThree' value={headerCardData.highlightThree} onChange={handelHeaderCardInput} />
               </Col>
               <Col xs={12} className=" d-flex justify-content-end gap-2">
                 <Button variant="danger">Cancel</Button>
                 <Button variant="success" type="submit">Submit</Button>
               </Col>
-            </Form>
-          </Row>
+            </Row>
+          </Form>
           <Table bordered hover responsive>
             <thead>
               <tr>
@@ -256,10 +256,10 @@ function Home() {
         <Container>
           <Row>
             <Form onSubmit={handelHeaderBatterieInputSubmit}>
-              <Col lg={4}>
+              <Col lg={12}>
                 <Form.Control type="text" placeholder="Enter New Text" name='batteriesHeading' value={batterieData.batteriesHeading} onChange={handelHeaderBatterieInput} />
               </Col>
-              <Col lg={4}>
+              <Col lg={12}>
                 <Form.Control as="textarea" placeholder="Enter New Text" name='batteriesDescription' value={batterieData.batteriesDescription} onChange={handelHeaderBatterieInput} />
               </Col>
               <Col xs={12} className=" d-flex justify-content-end gap-2">
@@ -299,22 +299,22 @@ function Home() {
         <h3>What We Do</h3>
         <Container>
           <Row>
-            <Col lg={4}>
+            <Col lg={12}>
               <Form.Control type="text" placeholder="Normal text" />
             </Col>
-            <Col lg={4}>
+            <Col lg={12}>
               <Form.Control type="text" placeholder="Normal text" />
             </Col>
-            <Col lg={4}>
+            <Col lg={12}>
               <Form.Control type="text" placeholder="Normal text" />
             </Col>
-            <Col lg={4}>
+            <Col lg={12}>
               <Form.Control type="text" placeholder="Normal text" />
             </Col>
-            <Col lg={4}>
+            <Col lg={12}>
               <Form.Control type="text" placeholder="Normal text" />
             </Col>
-            <Col lg={4}>
+            <Col lg={12}>
               <Form.Control type="text" placeholder="Normal text" />
             </Col>
             <Col xs={12} className=" d-flex justify-content-end gap-2">
@@ -346,11 +346,11 @@ function Home() {
         <Container>
           <Row>
             <Form onSubmit={handelHeaderContactInputSubmit}>
-              <Col lg={4}>
-                <Form.Control type="text" placeholder="Enter New Text" name='ContactUS' value={contactData.ContactUS} onChange={handelHeaderContactInput}/>
+              <Col lg={12}>
+                <Form.Control type="text" placeholder="Enter New Text" name='ContactUS' value={contactData.ContactUS} onChange={handelHeaderContactInput} />
               </Col>
-              <Col lg={4}>
-                <Form.Control as="textarea" placeholder="Enter New Text" name='ContactUSDescription' value={contactData.ContactUSDescription} onChange={handelHeaderContactInput}/>
+              <Col lg={12}>
+                <Form.Control as="textarea" placeholder="Enter New Text" name='ContactUSDescription' value={contactData.ContactUSDescription} onChange={handelHeaderContactInput} />
               </Col>
               <Col xs={12} className=" d-flex justify-content-end gap-2">
                 <Button variant="danger">Cancel</Button>

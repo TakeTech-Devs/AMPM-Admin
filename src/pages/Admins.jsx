@@ -26,24 +26,13 @@ export const Admins = () => {
                 <h3>Admin List</h3>
                 <Container>
                     <Row>
-                        <Col lg={4}>
-                            <Form.Control type="text" placeholder="Normal text" />
+                        <Col lg={12}>
+                            <Form.Control type="text" placeholder="Admin Name" />
                         </Col>
-                        <Col lg={4}>
-                            <Form.Control type="text" placeholder="Normal text" />
+                        <Col lg={12}>
+                            <Form.Control type="text" placeholder="Admin Email" />
                         </Col>
-                        <Col lg={4}>
-                            <Form.Control type="text" placeholder="Normal text" />
-                        </Col>
-                        <Col lg={4}>
-                            <Form.Control type="text" placeholder="Normal text" />
-                        </Col>
-                        <Col lg={4}>
-                            <Form.Control type="text" placeholder="Normal text" />
-                        </Col>
-                        <Col lg={4}>
-                            <Form.Control type="text" placeholder="Normal text" />
-                        </Col>
+
                         <Col xs={12} className=" d-flex justify-content-end gap-2">
                             <Button variant="danger">Cancel</Button>
                             <Button variant="success">Submit</Button>
