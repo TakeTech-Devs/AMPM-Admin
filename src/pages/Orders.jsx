@@ -108,7 +108,14 @@ const Orders = () => {
                                         <td>{user.totalPrice}</td>
                                         <td>{new Date(user.paidAt).toLocaleString("en-IN", { timeZone: "Asia/Kolkata" })}</td>
                                         <td>{user.orderStatus}</td>
-                                        <td><Button onClick={() => handleShowEditForm(user)}><EditIcon /></Button></td>
+                                        <td>
+                                            <Button
+                                                variant="outline-danger"
+                                                onClick={() => handleShowEditForm(user)}
+                                            >
+                                                <EditIcon style={{ fontSize: "20px" }} />
+                                            </Button>
+                                        </td>
                                     </tr>
                                 ))
                             ) : (
@@ -134,7 +141,7 @@ const Orders = () => {
                                 onChange={handleStatusChange}
                                 aria-label="Select Order Status"
                             >
-                                <option value="">Select status</option>
+                                <option value="">Select Status</option>
                                 {selectedOrder?.orderStatus !== "Shipped" && selectedOrder?.orderStatus !== "Delivered" && (
                                     <option value="Shipped">Shipped</option>
                                 )}
@@ -143,11 +150,16 @@ const Orders = () => {
                                 )}
                             </Form.Select>
                         </Form.Group>
-                        <Button variant="primary" type="submit">
-                            Submit
-                        </Button>
                     </Form>
                 </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="danger" onClick={handleCloseEditForm}>
+                        Close
+                    </Button>
+                    <Button variant="success" type="submit">
+                        Submit
+                    </Button>
+                </Modal.Footer>
             </Modal>
         </>
     )
