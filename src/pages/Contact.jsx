@@ -74,10 +74,10 @@ const Contact = () => {
                 <Container>
                     <Row>
                         <Form onSubmit={handelHeaderInputSubmit}>
-                            <Col lg={4}>
+                            <Col lg={12}>
                                 <Form.Control type="text" placeholder="Enter New Banner Title" name='headerTitle' value={headerData.headerTitle} onChange={handelHeaderInput} />
                             </Col>
-                            <Col lg={4}>
+                            <Col lg={12}>
                                 <Form.Control as="textarea" placeholder="Enter New Banner Description" name='headerDescription' value={headerData.headerDescription} onChange={handelHeaderInput} />
                             </Col>
                             <Col xs={12} className=" d-flex justify-content-end gap-2">
@@ -117,13 +117,13 @@ const Contact = () => {
                 <Container>
                     <Row>
                         <Form onSubmit={handelHeaderInputSubmit}>
-                            <Col lg={4}>
+                            <Col lg={12}>
                                 <Form.Control type="text" placeholder="Enter New Landline Number" name='Landline' value={headerData.Landline} onChange={handelHeaderInput} />
                             </Col>
-                            <Col lg={4}>
+                            <Col lg={12}>
                                 <Form.Control type="text" placeholder="Enter New Mobile Number"  name='Mobile' value={headerData.Mobile} onChange={handelHeaderInput} />
                             </Col>
-                            <Col lg={4}>
+                            <Col lg={12}>
                                 <Form.Control type="text" placeholder="Enter New Email" name='Email' value={headerData.Email} onChange={handelHeaderInput}/>
                             </Col>
                             <Col xs={12} className=" d-flex justify-content-end gap-2">

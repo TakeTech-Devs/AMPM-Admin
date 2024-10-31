@@ -10,22 +10,22 @@ const Product = () => {
                 <h3>Banner Section</h3>
                 <Container>
                     <Row>
-                        <Col lg={4}>
+                        <Col lg={12}>
                             <Form.Control type="text" placeholder="Normal text" />
                         </Col>
-                        <Col lg={4}>
+                        <Col lg={12}>
                             <Form.Control type="text" placeholder="Normal text" />
                         </Col>
-                        <Col lg={4}>
+                        <Col lg={12}>
                             <Form.Control type="text" placeholder="Normal text" />
                         </Col>
-                        <Col lg={4}>
+                        <Col lg={12}>
                             <Form.Control type="text" placeholder="Normal text" />
                         </Col>
-                        <Col lg={4}>
+                        <Col lg={12}>
                             <Form.Control type="text" placeholder="Normal text" />
                         </Col>
-                        <Col lg={4}>
+                        <Col lg={12}>
                             <Form.Control type="text" placeholder="Normal text" />
                         </Col>
                         <Col xs={12} className=" d-flex justify-content-end gap-2">
@@ -55,22 +55,22 @@ const Product = () => {
                 <h3>Batteries Bottom Section</h3>
                 <Container>
                     <Row>
-                        <Col lg={4}>
+                        <Col lg={12}>
                             <Form.Control type="text" placeholder="Normal text" />
                         </Col>
-                        <Col lg={4}>
+                        <Col lg={12}>
                             <Form.Control type="text" placeholder="Normal text" />
                         </Col>
-                        <Col lg={4}>
+                        <Col lg={12}>
                             <Form.Control type="text" placeholder="Normal text" />
                         </Col>
-                        <Col lg={4}>
+                        <Col lg={12}>
                             <Form.Control type="text" placeholder="Normal text" />
                         </Col>
-                        <Col lg={4}>
+                        <Col lg={12}>
                             <Form.Control type="text" placeholder="Normal text" />
                         </Col>
-                        <Col lg={4}>
+                        <Col lg={12}>
                             <Form.Control type="text" placeholder="Normal text" />
                         </Col>
                         <Col xs={12} className=" d-flex justify-content-end gap-2">
@@ -100,22 +100,22 @@ const Product = () => {
                 <h3>Batteries Bottom Cards Section</h3>
                 <Container>
                     <Row>
-                        <Col lg={4}>
+                        <Col lg={12}>
                             <Form.Control type="text" placeholder="Normal text" />
                         </Col>
-                        <Col lg={4}>
+                        <Col lg={12}>
                             <Form.Control type="text" placeholder="Normal text" />
                         </Col>
-                        <Col lg={4}>
+                        <Col lg={12}>
                             <Form.Control type="text" placeholder="Normal text" />
                         </Col>
-                        <Col lg={4}>
+                        <Col lg={12}>
                             <Form.Control type="text" placeholder="Normal text" />
                         </Col>
-                        <Col lg={4}>
+                        <Col lg={12}>
                             <Form.Control type="text" placeholder="Normal text" />
                         </Col>
-                        <Col lg={4}>
+                        <Col lg={12}>
                             <Form.Control type="text" placeholder="Normal text" />
                         </Col>
                         <Col xs={12} className=" d-flex justify-content-end gap-2">
@@ -145,22 +145,22 @@ const Product = () => {
                 <h3>Features</h3>
                 <Container>
                     <Row>
-                        <Col lg={4}>
+                        <Col lg={12}>
                             <Form.Control type="text" placeholder="Normal text" />
                         </Col>
-                        <Col lg={4}>
+                        <Col lg={12}>
                             <Form.Control type="text" placeholder="Normal text" />
                         </Col>
-                        <Col lg={4}>
+                        <Col lg={12}>
                             <Form.Control type="text" placeholder="Normal text" />
                         </Col>
-                        <Col lg={4}>
+                        <Col lg={12}>
                             <Form.Control type="text" placeholder="Normal text" />
                         </Col>
-                        <Col lg={4}>
+                        <Col lg={12}>
                             <Form.Control type="text" placeholder="Normal text" />
                         </Col>
-                        <Col lg={4}>
+                        <Col lg={12}>
                             <Form.Control type="text" placeholder="Normal text" />
                         </Col>
                         <Col xs={12} className=" d-flex justify-content-end gap-2">
@@ -190,22 +190,22 @@ const Product = () => {
                 <h3>What We Do</h3>
                 <Container>
                     <Row>
-                        <Col lg={4}>
+                        <Col lg={12}>
                             <Form.Control type="text" placeholder="Normal text" />
                         </Col>
-                        <Col lg={4}>
+                        <Col lg={12}>
                             <Form.Control type="text" placeholder="Normal text" />
                         </Col>
-                        <Col lg={4}>
+                        <Col lg={12}>
                             <Form.Control type="text" placeholder="Normal text" />
                         </Col>
-                        <Col lg={4}>
+                        <Col lg={12}>
                             <Form.Control type="text" placeholder="Normal text" />
                         </Col>
-                        <Col lg={4}>
+                        <Col lg={12}>
                             <Form.Control type="text" placeholder="Normal text" />
                         </Col>
-                        <Col lg={4}>
+                        <Col lg={12}>
                             <Form.Control type="text" placeholder="Normal text" />
                         </Col>
                         <Col xs={12} className=" d-flex justify-content-end gap-2">
