@@ -11,6 +11,9 @@ import {
     LOAD_ADMIN_FAIL,
     LOGOUT_SUCCESS,
     LOGOUT_FAIL,
+    ADD_NEW_ADMIN_REQUEST,
+    ADD_NEW_ADMIN_SUCCESS,
+    ADD_NEW_ADMIN_FAIL,
 } from '../Constants/AdminConstants';
 import axios from 'axios';
 
@@ -57,12 +60,28 @@ export const loadAdmin = () => async (dispatch) => {
 
 export const logout = () => async (dispatch) => {
     try {
-        await axios.get(`http://localhost:5000/api/v1/admin/logout`, {withCredentials: true});
+        await axios.get(`http://localhost:5000/api/v1/admin/logout`);
 
         dispatch({ type: LOGOUT_SUCCESS });
         console.log("hi")
     } catch (error) {
         dispatch({ type: LOGOUT_FAIL, payload: error.response.data.message });
+    }
+};
+
+export const addAdmin = (Data) => async (dispatch) => {
+    dispatch({ type: ADD_NEW_ADMIN_REQUEST });
+
+    const config = {
+        headers: { "Content-Type": "application/json" }, withCredentials: true
+    }
+
+    try {
+        const response = await axios.post(`http://localhost:5000/api/v1/admin/admin-register`,  Data , config);
+
+        dispatch({ type: ADD_NEW_ADMIN_SUCCESS, payload: response.data });
+    } catch (error) {
+        dispatch({ type: ADD_NEW_ADMIN_FAIL, error: error.response.data.msg || error.message });
     }
 };
 

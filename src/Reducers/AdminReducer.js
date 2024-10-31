@@ -11,6 +11,10 @@ import {
     LOAD_ADMIN_FAIL,
     LOGOUT_SUCCESS,
     LOGOUT_FAIL,
+    ADD_NEW_ADMIN_REQUEST,
+    ADD_NEW_ADMIN_SUCCESS,
+    ADD_NEW_ADMIN_FAIL,
+    ADD_NEW_ADMIN_RESET,
 } from '../Constants/AdminConstants';
 
 
@@ -96,6 +100,34 @@ export const adminLoginReducer = (state = { user: {} }, action) => {
             return {
                 ...state,
                 error: null,
+            };
+        default:
+            return state;
+    }
+}
+
+export const authReducer = (state = {}, action) => {
+    switch (action.type) {
+        case ADD_NEW_ADMIN_REQUEST:
+            return {
+                loading: true,
+                isAuthenticated: false,
+            };
+        case ADD_NEW_ADMIN_SUCCESS:
+            return {
+                loading: false,
+                isAuthenticated: false,
+            }
+        case ADD_NEW_ADMIN_FAIL:
+            return {
+                loading: false,
+                isAuthenticated: false,
+                error: action.payload
+            }
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                user: null,
             };
         default:
             return state;

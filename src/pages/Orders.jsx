@@ -1,15 +1,21 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Form, Container, Row, Col, Button, Table } from "react-bootstrap";
 import "../styles/Dashboard.scss";
 import "../styles/Global.scss";
 import { useDispatch, useSelector } from 'react-redux';
-import { clearErrors, getOrder } from '../Actions/OrderActions';
+import { clearErrors, getOrder, updateOrder } from '../Actions/OrderActions';
+import EditIcon from '@mui/icons-material/Edit';
+import Modal from 'react-bootstrap/Modal';
+import { UPDATE_ADMIN_ORDER_RESET } from '../Constants/OrderConstants';
+
 
 const Orders = () => {
 
     const dispatch = useDispatch();
 
     const { orders, error, loading } = useSelector((state) => state.adminOrders);
+
+    const { error: updateError, isUpdated } = useSelector((state) => state.order);
 
     useEffect(() => {
         if (error) {
@@ -18,6 +24,42 @@ const Orders = () => {
         }
         dispatch(getOrder());
     }, [dispatch, error]);
+
+    const [showEditForm, setShowEditForm] = useState(false);
+    const [selectedOrder, setSelectedOrder] = useState(null);
+    const [orderStatus, setOrderStatus] = useState("");
+
+    useEffect(() => {
+        if (isUpdated) {
+            alert("Order status updated successfully");
+            dispatch(getOrder());  // Refresh orders list after update
+            dispatch({ type: UPDATE_ADMIN_ORDER_RESET });
+            handleCloseEditForm(); // Close modal
+        }
+    }, [dispatch, isUpdated]);
+
+    const handleShowEditForm = (order) => {
+        setSelectedOrder(order);
+        setOrderStatus(order.orderStatus);
+        setShowEditForm(true);
+    };
+    const handleCloseEditForm = () => {
+        setShowEditForm(false);
+        setSelectedOrder(null);
+        setOrderStatus("");
+    };
+
+    const handleStatusChange = (e) => {
+        setOrderStatus(e.target.value);
+    };
+
+    const submitOrderUpdate = (e) => {
+        e.preventDefault();
+        if (selectedOrder && orderStatus) {
+            dispatch(updateOrder(selectedOrder._id, { status: orderStatus }));
+        }
+    };
+
 
 
     return (
@@ -38,15 +80,6 @@ const Orders = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {/* <tr>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                <td>@mdo</td>
-                                <td>@mdo</td>
-                                <td>@mdo</td> 
-                                <td>@mdo</td> 
-                            </tr> */}
                             {orders && orders.length > 0 ? (
                                 orders.map((user, index) => (
                                     <tr key={index}>
@@ -75,17 +108,47 @@ const Orders = () => {
                                         <td>{user.totalPrice}</td>
                                         <td>{new Date(user.paidAt).toLocaleString("en-IN", { timeZone: "Asia/Kolkata" })}</td>
                                         <td>{user.orderStatus}</td>
+                                        <td><Button onClick={() => handleShowEditForm(user)}><EditIcon /></Button></td>
                                     </tr>
                                 ))
                             ) : (
                                 <tr>
-                                    <td colSpan="8" className="text-center">No consumers found</td>
+                                    <td colSpan="8" className="text-center">No order found</td>
                                 </tr>
                             )}
                         </tbody>
                     </Table>
                 </Container>
             </div>
+
+            <Modal show={showEditForm} onHide={handleCloseEditForm}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Order Update - {selectedOrder?._id}</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Form onSubmit={submitOrderUpdate}>
+                        <Form.Group className="mb-3" controlId="formOrderStatus">
+                            <Form.Label>Update Order Status</Form.Label>
+                            <Form.Select
+                                value={orderStatus}
+                                onChange={handleStatusChange}
+                                aria-label="Select Order Status"
+                            >
+                                <option value="">Select status</option>
+                                {selectedOrder?.orderStatus !== "Shipped" && selectedOrder?.orderStatus !== "Delivered" && (
+                                    <option value="Shipped">Shipped</option>
+                                )}
+                                {selectedOrder?.orderStatus === "Shipped" && (
+                                    <option value="Delivered">Delivered</option>
+                                )}
+                            </Form.Select>
+                        </Form.Group>
+                        <Button variant="primary" type="submit">
+                            Submit
+                        </Button>
+                    </Form>
+                </Modal.Body>
+            </Modal>
         </>
     )
 }

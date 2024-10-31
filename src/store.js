@@ -5,9 +5,9 @@ import { homeReducer, newHomeData } from './Reducers/HomeReducer';
 import { aboutReducer, newAboutData } from './Reducers/AboutReducer';
 import { contactReducer, newContactData } from './Reducers/ContactReducer';
 import { consumerReducer } from './Reducers/ConsumerReducer';
-import { resellerReducer } from './Reducers/ResellerReducer';
-import { adminLoginReducer, adminReducer } from './Reducers/AdminReducer';
-import { ordersReducer } from './Reducers/OrderReducer';
+import { resellerApproveReducer, resellerReducer } from './Reducers/ResellerReducer';
+import { adminLoginReducer, adminReducer, authReducer } from './Reducers/AdminReducer';
+import { orderReducer, ordersReducer } from './Reducers/OrderReducer';
 
 const reducer = combineReducers({
     adminHome: homeReducer,
@@ -21,6 +21,9 @@ const reducer = combineReducers({
     newContactData: newContactData,
     newHomeData: newHomeData,
     newAboutData: newAboutData,
+    authReducer: authReducer,
+    resellerApprove: resellerApproveReducer,
+    order: orderReducer,
     
 })
 
