@@ -81,10 +81,17 @@ const Orders = () => {
                         </thead>
                         <tbody>
                             {orders && orders.length > 0 ? (
-                                orders.map((user, index) => (
+                                // Reverse the orders array
+                                [...orders].reverse().map((user, index) => ( // Use spread operator to avoid mutating the original array
                                     <tr key={index}>
                                         <td>{user._id || "N/A"}</td>
-                                        <td>{user.shippingInfo.firstName || "N/A"} {user.shippingInfo.lastName || "N/A"}, {user.shippingInfo.address || "N/A"}, {user.shippingInfo.city || "N/A"}, {user.shippingInfo.pin || "N/A"}, {user.shippingInfo.state || "N/A"}, {user.shippingInfo.country || "N/A"},  Phone: {user.shippingInfo.phone || "N/A"}, Email: {user.shippingInfo.email || "N/A"}</td>
+                                        <td>
+                                            {user.shippingInfo.firstName || "N/A"} {user.shippingInfo.lastName || "N/A"},
+                                            {user.shippingInfo.address || "N/A"}, {user.shippingInfo.city || "N/A"},
+                                            {user.shippingInfo.pin || "N/A"}, {user.shippingInfo.state || "N/A"},
+                                            {user.shippingInfo.country || "N/A"}, Phone: {user.shippingInfo.phone || "N/A"},
+                                            Email: {user.shippingInfo.email || "N/A"}
+                                        </td>
                                         <td>
                                             <Table bordered>
                                                 <thead>
@@ -110,7 +117,7 @@ const Orders = () => {
                                         <td>{user.orderStatus}</td>
                                         <td>
                                             <Button
-                                                variant="outline-danger"
+                                                variant="outline-success"
                                                 onClick={() => handleShowEditForm(user)}
                                             >
                                                 <EditIcon style={{ fontSize: "20px" }} />
@@ -124,6 +131,7 @@ const Orders = () => {
                                 </tr>
                             )}
                         </tbody>
+
                     </Table>
                 </Container>
             </div>

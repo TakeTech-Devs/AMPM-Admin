@@ -60,8 +60,7 @@ export const loadAdmin = () => async (dispatch) => {
 
 export const logout = () => async (dispatch) => {
     try {
-        await axios.get(`http://localhost:5000/api/v1/admin/logout`);
-
+        await axios.get(`http://localhost:5000/api/v1/admin/logout`,{withCredentials:true});
         dispatch({ type: LOGOUT_SUCCESS });
         console.log("hi")
     } catch (error) {
