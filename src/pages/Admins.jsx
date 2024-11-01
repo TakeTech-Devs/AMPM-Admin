@@ -77,13 +77,13 @@ export const Admins = () => {
                     <Form onSubmit={handelAdminInputSubmit}>
                         <Row >
                             <Col lg={12}>
-                                <Form.Control type="text" placeholder="Admin Name" name='name' value={adminData.name} onChange={handelAdminInput}/>
+                                <Form.Control type="text" placeholder="Admin Name" name='name' value={adminData.name} onChange={handelAdminInput} />
                             </Col>
                             <Col lg={12}>
-                                <Form.Control type="email" placeholder="Admin Email" name='email' value={adminData.email} onChange={handelAdminInput}/>
+                                <Form.Control type="email" placeholder="Admin Email" name='email' value={adminData.email} onChange={handelAdminInput} />
                             </Col>
                             <Col lg={12}>
-                                <Form.Control type="password" placeholder="Admin Password" name='password' value={adminData.password} onChange={handelAdminInput}/>
+                                <Form.Control type="password" placeholder="Admin Password" name='password' value={adminData.password} onChange={handelAdminInput} />
                             </Col>
 
                             <Col xs={12} className=" d-flex justify-content-end gap-2">
@@ -100,12 +100,9 @@ export const Admins = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {/* <tr>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                            </tr> */}
                             {admin && admin.length > 0 ? (
-                                admin.map((user, index) => (
+                                // Reverse the admin array
+                                [...admin].reverse().map((user, index) => ( // Use spread operator to avoid mutating the original array
                                     <tr key={index}>
                                         <td>{user.name || "N/A"}</td>
                                         <td>{user.email || "N/A"}</td>
@@ -117,6 +114,7 @@ export const Admins = () => {
                                 </tr>
                             )}
                         </tbody>
+
                     </Table>
                 </Container>
             </div>

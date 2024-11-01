@@ -81,10 +81,17 @@ const Orders = () => {
                         </thead>
                         <tbody>
                             {orders && orders.length > 0 ? (
-                                orders.map((user, index) => (
+                                // Reverse the orders array
+                                [...orders].reverse().map((user, index) => ( // Use spread operator to avoid mutating the original array
                                     <tr key={index}>
                                         <td>{user._id || "N/A"}</td>
-                                        <td>{user.shippingInfo.firstName || "N/A"} {user.shippingInfo.lastName || "N/A"}, {user.shippingInfo.address || "N/A"}, {user.shippingInfo.city || "N/A"}, {user.shippingInfo.pin || "N/A"}, {user.shippingInfo.state || "N/A"}, {user.shippingInfo.country || "N/A"},  Phone: {user.shippingInfo.phone || "N/A"}, Email: {user.shippingInfo.email || "N/A"}</td>
+                                        <td>
+                                            {user.shippingInfo.firstName || "N/A"} {user.shippingInfo.lastName || "N/A"},
+                                            {user.shippingInfo.address || "N/A"}, {user.shippingInfo.city || "N/A"},
+                                            {user.shippingInfo.pin || "N/A"}, {user.shippingInfo.state || "N/A"},
+                                            {user.shippingInfo.country || "N/A"}, Phone: {user.shippingInfo.phone || "N/A"},
+                                            Email: {user.shippingInfo.email || "N/A"}
+                                        </td>
                                         <td>
                                             <Table bordered>
                                                 <thead>
@@ -108,7 +115,14 @@ const Orders = () => {
                                         <td>{user.totalPrice}</td>
                                         <td>{new Date(user.paidAt).toLocaleString("en-IN", { timeZone: "Asia/Kolkata" })}</td>
                                         <td>{user.orderStatus}</td>
-                                        <td><Button onClick={() => handleShowEditForm(user)}><EditIcon /></Button></td>
+                                        <td>
+                                            <Button
+                                                variant="outline-success"
+                                                onClick={() => handleShowEditForm(user)}
+                                            >
+                                                <EditIcon style={{ fontSize: "20px" }} />
+                                            </Button>
+                                        </td>
                                     </tr>
                                 ))
                             ) : (
@@ -117,6 +131,7 @@ const Orders = () => {
                                 </tr>
                             )}
                         </tbody>
+
                     </Table>
                 </Container>
             </div>
@@ -134,7 +149,7 @@ const Orders = () => {
                                 onChange={handleStatusChange}
                                 aria-label="Select Order Status"
                             >
-                                <option value="">Select status</option>
+                                <option value="">Select Status</option>
                                 {selectedOrder?.orderStatus !== "Shipped" && selectedOrder?.orderStatus !== "Delivered" && (
                                     <option value="Shipped">Shipped</option>
                                 )}
@@ -143,11 +158,16 @@ const Orders = () => {
                                 )}
                             </Form.Select>
                         </Form.Group>
-                        <Button variant="primary" type="submit">
-                            Submit
-                        </Button>
                     </Form>
                 </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="danger" onClick={handleCloseEditForm}>
+                        Close
+                    </Button>
+                    <Button variant="success" type="submit">
+                        Submit
+                    </Button>
+                </Modal.Footer>
             </Modal>
         </>
     )

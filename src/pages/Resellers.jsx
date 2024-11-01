@@ -26,7 +26,7 @@ const Resellers = () => {
         window.location.reload();
     }
 
-    useEffect(() =>{
+    useEffect(() => {
         if (approveError) {
             window.alert(approveError);
             dispatch(clearErrors);
@@ -38,10 +38,10 @@ const Resellers = () => {
             dispatch({ type: RESELLER_APPROVE_RESET });
 
         }
-    },[dispatch, isApproved, approveError])
+    }, [dispatch, isApproved, approveError])
 
 
-    
+
 
     return (
         <>
@@ -61,17 +61,9 @@ const Resellers = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {/* <tr>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                <td>@mdo</td>
-                                <td>@mdo</td>
-                                <td>@mdo</td>
-                                <td>@mdo</td>
-                            </tr> */}
                             {reseller && reseller.length > 0 ? (
-                                reseller.map((user, index) => (
+                                // Reverse the reseller array
+                                [...reseller].reverse().map((user, index) => ( // Use spread operator to avoid mutating the original array
                                     <tr key={index}>
                                         <td>{user.fullName || "N/A"}</td>
                                         <td>{user.businessName || "N/A"}</td>
@@ -79,8 +71,13 @@ const Resellers = () => {
                                         <td>{user.abn || "N/A"}</td>
                                         <td>{user.businessEmail || "N/A"}</td>
                                         <td>{user.businessWebsite || "N/A"}</td>
-                                        <td>{user.approvalStatus ?<Button variant="success" onClick={() => approveProductHandler(user._id)}>Approved</Button>: <Button variant="danger" onClick={() => approveProductHandler(user._id)}>Not Approved</Button>}</td>
-                                        {/* <td><Button variant="success" type="submit">Submit</Button></td> */}
+                                        <td>
+                                            {user.approvalStatus ? (
+                                                <Button variant="success" onClick={() => approveProductHandler(user._id)}>Approved</Button>
+                                            ) : (
+                                                <Button variant="danger" onClick={() => approveProductHandler(user._id)}>Not Approved</Button>
+                                            )}
+                                        </td>
                                     </tr>
                                 ))
                             ) : (
@@ -89,6 +86,7 @@ const Resellers = () => {
                                 </tr>
                             )}
                         </tbody>
+
                     </Table>
                 </Container>
             </div>

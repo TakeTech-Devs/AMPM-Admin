@@ -39,18 +39,9 @@ const Users = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {/* <tr>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                <td>@mdo</td>
-                                <td>@mdo</td>
-                                <td>@mdo</td>
-                                <td>@mdo</td>
-                                <td>@mdo</td>
-                            </tr> */}
-                           {consumer && consumer.length > 0 ? (
-                                consumer.map((user, index) => (
+                            {consumer && consumer.length > 0 ? (
+                                // Reverse the consumer array
+                                [...consumer].reverse().map((user, index) => ( // Use spread operator to avoid mutating the original array
                                     <tr key={index}>
                                         <td>{user.firstName || "N/A"}</td>
                                         <td>{user.lastName || "N/A"}</td>
@@ -68,6 +59,7 @@ const Users = () => {
                                 </tr>
                             )}
                         </tbody>
+
                     </Table>
                 </Container>
             </div>
