@@ -71,7 +71,7 @@ export const adminLoginReducer = (state = { user: {} }, action) => {
             }
         case LOGOUT_SUCCESS:
             return {
-                // loading: false,
+                loading: false,
                 user: null,
                 isAuthenticated: false,
             };

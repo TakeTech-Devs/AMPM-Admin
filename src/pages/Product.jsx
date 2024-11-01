@@ -14,19 +14,7 @@ const Product = () => {
                             <Form.Control type="text" placeholder="Normal text" />
                         </Col>
                         <Col lg={12}>
-                            <Form.Control type="text" placeholder="Normal text" />
-                        </Col>
-                        <Col lg={12}>
-                            <Form.Control type="text" placeholder="Normal text" />
-                        </Col>
-                        <Col lg={12}>
-                            <Form.Control type="text" placeholder="Normal text" />
-                        </Col>
-                        <Col lg={12}>
-                            <Form.Control type="text" placeholder="Normal text" />
-                        </Col>
-                        <Col lg={12}>
-                            <Form.Control type="text" placeholder="Normal text" />
+                            <Form.Control as="textarea" placeholder="Normal text" />
                         </Col>
                         <Col xs={12} className=" d-flex justify-content-end gap-2">
                             <Button variant="danger">Cancel</Button>
@@ -36,23 +24,52 @@ const Product = () => {
                     <Table bordered hover responsive>
                         <thead>
                             <tr>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Username</th>
+                                <th>Banner Title</th>
+                                <th>Banner Description</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>Mark</td>
                                 <td>Otto</td>
-                                <td>@mdo</td>
                             </tr>
                         </tbody>
                     </Table>
                 </Container>
             </div>
             <div className="cardbox">
-                <h3>Batteries Bottom Section</h3>
+                <h3>Battery Section</h3>
+                <Container>
+                    <Row>
+                        <Col lg={12}>
+                            <Form.Control type="text" placeholder="Normal text" />
+                        </Col>
+                        <Col lg={12}>
+                            <Form.Control as="textarea" placeholder="Normal text" />
+                        </Col>
+                        <Col xs={12} className=" d-flex justify-content-end gap-2">
+                            <Button variant="danger">Cancel</Button>
+                            <Button variant="success">Submit</Button>
+                        </Col>
+                    </Row>
+                    <Table bordered hover responsive>
+                        <thead>
+                            <tr>
+                                <th>Battery Title</th>
+                                <th>Battery Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Mark</td>
+                                <td>Otto</td>
+                            </tr>
+                        </tbody>
+                    </Table>
+                </Container>
+            </div>
+            <div className="cardbox">
+                <h3>Batteries Cards Section</h3>
                 <Container>
                     <Row>
                         <Col lg={12}>
@@ -64,15 +81,6 @@ const Product = () => {
                         <Col lg={12}>
                             <Form.Control type="text" placeholder="Normal text" />
                         </Col>
-                        <Col lg={12}>
-                            <Form.Control type="text" placeholder="Normal text" />
-                        </Col>
-                        <Col lg={12}>
-                            <Form.Control type="text" placeholder="Normal text" />
-                        </Col>
-                        <Col lg={12}>
-                            <Form.Control type="text" placeholder="Normal text" />
-                        </Col>
                         <Col xs={12} className=" d-flex justify-content-end gap-2">
                             <Button variant="danger">Cancel</Button>
                             <Button variant="success">Submit</Button>
@@ -81,54 +89,9 @@ const Product = () => {
                     <Table bordered hover responsive>
                         <thead>
                             <tr>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Username</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                            </tr>
-                        </tbody>
-                    </Table>
-                </Container>
-            </div>
-            <div className="cardbox">
-                <h3>Batteries Bottom Cards Section</h3>
-                <Container>
-                    <Row>
-                        <Col lg={12}>
-                            <Form.Control type="text" placeholder="Normal text" />
-                        </Col>
-                        <Col lg={12}>
-                            <Form.Control type="text" placeholder="Normal text" />
-                        </Col>
-                        <Col lg={12}>
-                            <Form.Control type="text" placeholder="Normal text" />
-                        </Col>
-                        <Col lg={12}>
-                            <Form.Control type="text" placeholder="Normal text" />
-                        </Col>
-                        <Col lg={12}>
-                            <Form.Control type="text" placeholder="Normal text" />
-                        </Col>
-                        <Col lg={12}>
-                            <Form.Control type="text" placeholder="Normal text" />
-                        </Col>
-                        <Col xs={12} className=" d-flex justify-content-end gap-2">
-                            <Button variant="danger">Cancel</Button>
-                            <Button variant="success">Submit</Button>
-                        </Col>
-                    </Row>
-                    <Table bordered hover responsive>
-                        <thead>
-                            <tr>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Username</th>
+                                <th>Battery Card One</th>
+                                <th>Battery Card Two</th>
+                                <th>Battery Card Three</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -146,19 +109,7 @@ const Product = () => {
                 <Container>
                     <Row>
                         <Col lg={12}>
-                            <Form.Control type="text" placeholder="Normal text" />
-                        </Col>
-                        <Col lg={12}>
-                            <Form.Control type="text" placeholder="Normal text" />
-                        </Col>
-                        <Col lg={12}>
-                            <Form.Control type="text" placeholder="Normal text" />
-                        </Col>
-                        <Col lg={12}>
-                            <Form.Control type="text" placeholder="Normal text" />
-                        </Col>
-                        <Col lg={12}>
-                            <Form.Control type="text" placeholder="Normal text" />
+                            <Form.Control as="textarea" placeholder="Normal text" />
                         </Col>
                         <Col lg={12}>
                             <Form.Control type="text" placeholder="Normal text" />
@@ -171,22 +122,20 @@ const Product = () => {
                     <Table bordered hover responsive>
                         <thead>
                             <tr>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Username</th>
+                                <th>Feature Product</th>
+                                <th>Feature Product Points</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>Mark</td>
                                 <td>Otto</td>
-                                <td>@mdo</td>
                             </tr>
                         </tbody>
                     </Table>
                 </Container>
             </div>
-            <div className="cardbox">
+            {/* <div className="cardbox">
                 <h3>What We Do</h3>
                 <Container>
                     <Row>
@@ -230,7 +179,7 @@ const Product = () => {
                         </tbody>
                     </Table>
                 </Container>
-            </div>
+            </div> */}
         </>
     )
 }
