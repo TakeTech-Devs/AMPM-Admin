@@ -1,25 +1,133 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Form, Container, Row, Col, Button, Table } from "react-bootstrap";
 import "../styles/Dashboard.scss";
 import "../styles/Global.scss";
+import { useDispatch, useSelector } from 'react-redux';
+import { clearErrors, createProductBattery, createProductBatteryCard, createProductHeader, getProdcutData } from '../Actions/ProductActions';
+import { ADD_BATTERY_ADMIN_RESET, ADD_BATTERYCARD_ADMIN_RESET, ADD_PRODUCTHEADER_ADMIN_RESET } from '../Constants/ProductConstants';
 
 const Product = () => {
+    const dispatch = useDispatch();
+
+    const { productData, loading, error } = useSelector(state => state.productData);
+
+    useEffect(() => {
+        dispatch(getProdcutData());
+
+        if (error) {
+            window.alert(error);
+            dispatch(clearErrors());
+        }
+    }, [dispatch, error])
+
+    const { newProductData, isUpdated, error: productError, } = useSelector(state => state.newProductData);
+
+    const [headerData, setHeaderData] = useState({
+        headerTitle: '',
+        headerDescription: '',
+    })
+
+
+    const [batteryData, setBatteryData] = useState({
+        batteryTitle: '',
+        batteryDescription: '',
+    })
+
+
+    const [batteryCardData, setBatteryCardData] = useState({
+        batteryCardOne: '',
+        batteryCardTwo: '',
+        batteryCardThree: '',
+    })
+
+    useEffect(() => {
+        if (newProductData) {
+            setHeaderData({
+                headerTitle: newProductData.headerTitle,
+                headerDescription: newProductData.headerDescription,
+            })
+            setBatteryData({
+                batteryTitle: newProductData.batteryTitle,
+                batteryDescription: newProductData.batteryDescription,
+            })
+            setBatteryCardData({
+                batteryCardOne: newProductData.batteryCardOne,
+                batteryCardTwo: newProductData.batteryCardTwo,
+                batteryCardThree: newProductData.batteryCardThree,
+            })
+        }
+
+        if (isUpdated) {
+            window.alert('Home Data Updated Successfully');
+            dispatch({ type: ADD_PRODUCTHEADER_ADMIN_RESET });
+            dispatch({ type: ADD_BATTERY_ADMIN_RESET });
+            dispatch({ type: ADD_BATTERYCARD_ADMIN_RESET });
+            window.location.reload()
+        }
+
+        if (productError) {
+            window.alert(productError);
+            dispatch(clearErrors());
+        }
+    }, [newProductData, isUpdated, productError, dispatch]);
+
+
+    const handelHeaderInput = (e) => {
+        setHeaderData({
+            ...headerData,
+            [e.target.name]: e.target.value,
+        });
+    }
+
+    const handelHeaderInputSubmit = (e) => {
+        e.preventDefault();
+        dispatch(createProductHeader(headerData));
+    }
+
+    const handelBatteryInput = (e) => {
+        setBatteryData({
+            ...batteryData,
+            [e.target.name]: e.target.value,
+        });
+    }
+
+    const handelBatteryInputSubmit = (e) => {
+        e.preventDefault();
+        dispatch(createProductBattery(batteryData));
+    }
+
+    const handelBatteryCardInput = (e) => {
+        setBatteryCardData({
+            ...batteryCardData,
+            [e.target.name]: e.target.value,
+        });
+    }
+
+    const handelBatteryCardInputSubmit = (e) => {
+        e.preventDefault();
+        dispatch(createProductBatteryCard(batteryCardData));
+    }
+
+
+
     return (
         <>
             <div className="cardbox">
                 <h3>Banner Section</h3>
                 <Container>
                     <Row>
-                        <Col lg={12}>
-                            <Form.Control type="text" placeholder="Normal text" />
-                        </Col>
-                        <Col lg={12}>
-                            <Form.Control as="textarea" placeholder="Normal text" />
-                        </Col>
-                        <Col xs={12} className=" d-flex justify-content-end gap-2">
-                            <Button variant="danger">Cancel</Button>
-                            <Button variant="success">Submit</Button>
-                        </Col>
+                        <Form onSubmit={handelHeaderInputSubmit}>
+                            <Col lg={12}>
+                                <Form.Control type="text" placeholder="Enter Banner Title" name='headerTitle' value={headerData.headerTitle} onChange={handelHeaderInput} />
+                            </Col>
+                            <Col lg={12}>
+                                <Form.Control as="textarea" placeholder="Enter Banner Description" name='headerDescription' value={headerData.headerDescription} onChange={handelHeaderInput} />
+                            </Col>
+                            <Col xs={12} className=" d-flex justify-content-end gap-2">
+                                <Button variant="danger">Cancel</Button>
+                                <Button variant="success" type='submit'>Submit</Button>
+                            </Col>
+                        </Form>
                     </Row>
                     <Table bordered hover responsive>
                         <thead>
@@ -30,8 +138,8 @@ const Product = () => {
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Mark</td>
-                                <td>Otto</td>
+                                <td>{productData[0]?.headerTitle}</td>
+                                <td>{productData[0]?.headerDescription}</td>
                             </tr>
                         </tbody>
                     </Table>
@@ -41,16 +149,18 @@ const Product = () => {
                 <h3>Battery Section</h3>
                 <Container>
                     <Row>
-                        <Col lg={12}>
-                            <Form.Control type="text" placeholder="Normal text" />
-                        </Col>
-                        <Col lg={12}>
-                            <Form.Control as="textarea" placeholder="Normal text" />
-                        </Col>
-                        <Col xs={12} className=" d-flex justify-content-end gap-2">
-                            <Button variant="danger">Cancel</Button>
-                            <Button variant="success">Submit</Button>
-                        </Col>
+                        <Form onSubmit={handelBatteryInputSubmit}>
+                            <Col lg={12}>
+                                <Form.Control type="text" placeholder="Enter Battery Title" name='batteryTitle' value={batteryData.batteryTitle} onChange={handelBatteryInput} />
+                            </Col>
+                            <Col lg={12}>
+                                <Form.Control as="textarea" placeholder="Enter Battery Description" name="batteryDescription" value={batteryData.batteryDescription} onChange={handelBatteryInput} />
+                            </Col>
+                            <Col xs={12} className=" d-flex justify-content-end gap-2">
+                                <Button variant="danger">Cancel</Button>
+                                <Button variant="success" type='submit'>Submit</Button>
+                            </Col>
+                        </Form>
                     </Row>
                     <Table bordered hover responsive>
                         <thead>
@@ -61,8 +171,8 @@ const Product = () => {
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Mark</td>
-                                <td>Otto</td>
+                                <td>{productData[0]?.batteryTitle}</td>
+                                <td>{productData[0]?.batteryDescription}</td>
                             </tr>
                         </tbody>
                     </Table>
@@ -72,19 +182,21 @@ const Product = () => {
                 <h3>Batteries Cards Section</h3>
                 <Container>
                     <Row>
-                        <Col lg={12}>
-                            <Form.Control type="text" placeholder="Normal text" />
-                        </Col>
-                        <Col lg={12}>
-                            <Form.Control type="text" placeholder="Normal text" />
-                        </Col>
-                        <Col lg={12}>
-                            <Form.Control type="text" placeholder="Normal text" />
-                        </Col>
-                        <Col xs={12} className=" d-flex justify-content-end gap-2">
-                            <Button variant="danger">Cancel</Button>
-                            <Button variant="success">Submit</Button>
-                        </Col>
+                        <Form onSubmit={handelBatteryCardInputSubmit}>
+                            <Col lg={12}>
+                                <Form.Control type="text" placeholder="Enter Batteries Cards" name='batteryCardOne' value={batteryCardData.batteryCardOne} onChange={handelBatteryCardInput}/>
+                            </Col>
+                            <Col lg={12}>
+                                <Form.Control type="text" placeholder="Enter Batteries Cards" name='batteryCardTwo' value={batteryCardData.batteryCardTwo} onChange={handelBatteryCardInput}/>
+                            </Col>
+                            <Col lg={12}>
+                                <Form.Control type="text" placeholder="Enter Batteries Cards" name='batteryCardThree' value={batteryCardData.batteryCardThree} onChange={handelBatteryCardInput}/>
+                            </Col>
+                            <Col xs={12} className=" d-flex justify-content-end gap-2">
+                                <Button variant="danger">Cancel</Button>
+                                <Button variant="success" type='submit'>Submit</Button>
+                            </Col>
+                        </Form>
                     </Row>
                     <Table bordered hover responsive>
                         <thead>
@@ -96,9 +208,9 @@ const Product = () => {
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
+                                <td>{productData[0]?.batteryCardOne}</td>
+                                <td>{productData[0]?.batteryCardTwo}</td>
+                                <td>{productData[0]?.batteryCardThree}</td>
                             </tr>
                         </tbody>
                     </Table>
@@ -109,10 +221,10 @@ const Product = () => {
                 <Container>
                     <Row>
                         <Col lg={12}>
-                            <Form.Control as="textarea" placeholder="Normal text" />
+                            <Form.Control as="textarea" placeholder="Feature Product" />
                         </Col>
                         <Col lg={12}>
-                            <Form.Control type="text" placeholder="Normal text" />
+                            <Form.Control type="text" placeholder="Feature Product Points" />
                         </Col>
                         <Col xs={12} className=" d-flex justify-content-end gap-2">
                             <Button variant="danger">Cancel</Button>
@@ -127,10 +239,20 @@ const Product = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                            </tr>
+                            {Array.isArray(productData) && productData.length > 0 && (
+                                productData.map((item, index) => (
+                                    <tr key={index}>
+                                        <td>{item.featureProduct}</td>
+                                        <td>
+                                            {item.featureProductPoints.map((point, pointIndex) => (
+                                                <div key={`${index}-${pointIndex}`}>
+                                                    {pointIndex + 1}. {point} {/* Counter for each point */}
+                                                </div>
+                                            ))}
+                                        </td>
+                                    </tr>
+                                ))
+                            )}
                         </tbody>
                     </Table>
                 </Container>
