@@ -1,15 +1,32 @@
-import React, { useEffect, useState } from 'react'
-import { Form, Container, Row, Col, Button, Table } from "react-bootstrap";
-import "../styles/Dashboard.scss";
-import "../styles/Global.scss";
+import React, { useEffect, useState } from 'react';
+import { Form, Container, Row, Col, Button, Table } from 'react-bootstrap';
+import '../styles/Dashboard.scss';
+import '../styles/Global.scss';
+import AddIcon from '@mui/icons-material/Add';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { useDispatch, useSelector } from 'react-redux';
-import { clearErrors, createProductBattery, createProductBatteryCard, createProductHeader, getProdcutData } from '../Actions/ProductActions';
-import { ADD_BATTERY_ADMIN_RESET, ADD_BATTERYCARD_ADMIN_RESET, ADD_PRODUCTHEADER_ADMIN_RESET } from '../Constants/ProductConstants';
+import {
+    clearErrors,
+    createProductBattery,
+    createProductBatteryCard,
+    createProductHeader,
+    getProdcutData,
+} from '../Actions/ProductActions';
+import {
+    ADD_BATTERY_ADMIN_RESET,
+    ADD_BATTERYCARD_ADMIN_RESET,
+    ADD_PRODUCTHEADER_ADMIN_RESET,
+} from '../Constants/ProductConstants';
 
 const Product = () => {
+    const [highlights, setHighlights] = useState([]);
+    const [highlightInput, setHighlightInput] = useState('');
+    const [featureProductDescription, setFeatureProductDescription] = useState('');
+    const [featureProducts, setFeatureProducts] = useState([]);
+
     const dispatch = useDispatch();
 
-    const { productData, loading, error } = useSelector(state => state.productData);
+    const { productData, loading, error } = useSelector((state) => state.productData);
 
     useEffect(() => {
         dispatch(getProdcutData());
@@ -18,43 +35,72 @@ const Product = () => {
             window.alert(error);
             dispatch(clearErrors());
         }
-    }, [dispatch, error])
+    }, [dispatch, error]);
 
-    const { newProductData, isUpdated, error: productError, } = useSelector(state => state.newProductData);
+    const { newProductData, isUpdated, error: productError } = useSelector(
+        (state) => state.newProductData
+    );
 
     const [headerData, setHeaderData] = useState({
         headerTitle: '',
         headerDescription: '',
-    })
-
+    });
 
     const [batteryData, setBatteryData] = useState({
         batteryTitle: '',
         batteryDescription: '',
-    })
-
+    });
 
     const [batteryCardData, setBatteryCardData] = useState({
         batteryCardOne: '',
         batteryCardTwo: '',
         batteryCardThree: '',
-    })
+    });
+
+    const addHighlight = () => {
+        if (!highlightInput.trim()) return;
+        setHighlights([...highlights, highlightInput]);
+        setHighlightInput('');
+    };
+
+    const deleteHighlight = (index) => {
+        setHighlights(highlights.filter((_, i) => i !== index));
+    };
+
+    const addFeatureProduct = () => {
+        if (!featureProductDescription.trim() || highlights.length === 0) return;
+
+        setFeatureProducts([
+            ...featureProducts,
+            {
+                featureProduct: featureProductDescription,
+                featureProductPoints: highlights,
+            },
+        ]);
+
+        setFeatureProductDescription('');
+        setHighlights([]);
+    };
+
+    const deleteFeatureProduct = (index) => {
+        setFeatureProducts(featureProducts.filter((_, i) => i !== index));
+    };
 
     useEffect(() => {
         if (newProductData) {
             setHeaderData({
                 headerTitle: newProductData.headerTitle,
                 headerDescription: newProductData.headerDescription,
-            })
+            });
             setBatteryData({
                 batteryTitle: newProductData.batteryTitle,
                 batteryDescription: newProductData.batteryDescription,
-            })
+            });
             setBatteryCardData({
                 batteryCardOne: newProductData.batteryCardOne,
                 batteryCardTwo: newProductData.batteryCardTwo,
                 batteryCardThree: newProductData.batteryCardThree,
-            })
+            });
         }
 
         if (isUpdated) {
@@ -62,7 +108,7 @@ const Product = () => {
             dispatch({ type: ADD_PRODUCTHEADER_ADMIN_RESET });
             dispatch({ type: ADD_BATTERY_ADMIN_RESET });
             dispatch({ type: ADD_BATTERYCARD_ADMIN_RESET });
-            window.location.reload()
+            window.location.reload();
         }
 
         if (productError) {
@@ -71,43 +117,41 @@ const Product = () => {
         }
     }, [newProductData, isUpdated, productError, dispatch]);
 
-
     const handelHeaderInput = (e) => {
         setHeaderData({
             ...headerData,
             [e.target.name]: e.target.value,
         });
-    }
+    };
 
     const handelHeaderInputSubmit = (e) => {
         e.preventDefault();
         dispatch(createProductHeader(headerData));
-    }
+    };
 
     const handelBatteryInput = (e) => {
         setBatteryData({
             ...batteryData,
             [e.target.name]: e.target.value,
         });
-    }
+    };
 
     const handelBatteryInputSubmit = (e) => {
         e.preventDefault();
         dispatch(createProductBattery(batteryData));
-    }
+    };
 
     const handelBatteryCardInput = (e) => {
         setBatteryCardData({
             ...batteryCardData,
             [e.target.name]: e.target.value,
         });
-    }
+    };
 
     const handelBatteryCardInputSubmit = (e) => {
         e.preventDefault();
         dispatch(createProductBatteryCard(batteryCardData));
-    }
-
+    };
 
 
     return (
@@ -184,13 +228,13 @@ const Product = () => {
                     <Row>
                         <Form onSubmit={handelBatteryCardInputSubmit}>
                             <Col lg={12}>
-                                <Form.Control type="text" placeholder="Enter Batteries Cards" name='batteryCardOne' value={batteryCardData.batteryCardOne} onChange={handelBatteryCardInput}/>
+                                <Form.Control type="text" placeholder="Enter Batteries Cards" name='batteryCardOne' value={batteryCardData.batteryCardOne} onChange={handelBatteryCardInput} />
                             </Col>
                             <Col lg={12}>
-                                <Form.Control type="text" placeholder="Enter Batteries Cards" name='batteryCardTwo' value={batteryCardData.batteryCardTwo} onChange={handelBatteryCardInput}/>
+                                <Form.Control type="text" placeholder="Enter Batteries Cards" name='batteryCardTwo' value={batteryCardData.batteryCardTwo} onChange={handelBatteryCardInput} />
                             </Col>
                             <Col lg={12}>
-                                <Form.Control type="text" placeholder="Enter Batteries Cards" name='batteryCardThree' value={batteryCardData.batteryCardThree} onChange={handelBatteryCardInput}/>
+                                <Form.Control type="text" placeholder="Enter Batteries Cards" name='batteryCardThree' value={batteryCardData.batteryCardThree} onChange={handelBatteryCardInput} />
                             </Col>
                             <Col xs={12} className=" d-flex justify-content-end gap-2">
                                 <Button variant="danger">Cancel</Button>
@@ -221,14 +265,43 @@ const Product = () => {
                 <Container>
                     <Row>
                         <Col lg={12}>
-                            <Form.Control as="textarea" placeholder="Feature Product" />
+                            <Form.Control
+                                as="textarea"
+                                placeholder="Feature Product"
+                                value={featureProductDescription}
+                                onChange={(e) => setFeatureProductDescription(e.target.value)}
+                            />
                         </Col>
-                        <Col lg={12}>
-                            <Form.Control type="text" placeholder="Feature Product Points" />
+                        <Col lg={12} className="d-flex align-items-center">
+                            <Form.Control
+                                value={highlightInput}
+                                onChange={(e) => setHighlightInput(e.target.value)}
+                                type="text"
+                                placeholder="Add a highlight"
+                            />
+                            <Button onClick={addHighlight} variant="outline-success" className="ms-2">
+                                <AddIcon style={{ fontSize: "20px" }} />
+                            </Button>
                         </Col>
-                        <Col xs={12} className=" d-flex justify-content-end gap-2">
-                            <Button variant="danger">Cancel</Button>
-                            <Button variant="success">Submit</Button>
+                        <Col lg={12} className="mt-2">
+                            {highlights.map((highlight, i) => (
+                                <div
+                                    key={i}
+                                    className="d-flex justify-content-between align-items-center p-2 mb-2 border rounded bg-light">
+                                    <span className="text">{highlight}</span>
+                                    <Button className="d-flex justify-content-center btn-highlight" variant="outline-danger" onClick={() => deleteHighlight(i)}>
+                                        <DeleteForeverIcon style={{ fontSize: "20px" }} />
+                                    </Button>
+                                </div>
+                            ))}
+                        </Col>
+                        <Col xs={12} className="d-flex justify-content-end gap-2 mt-2">
+                            <Button variant="danger" onClick={() => setHighlights([])}>
+                                Clear
+                            </Button>
+                            <Button variant="success" onClick={addFeatureProduct}>
+                                Submit
+                            </Button>
                         </Col>
                     </Row>
                     <Table bordered hover responsive>
@@ -236,23 +309,31 @@ const Product = () => {
                             <tr>
                                 <th>Feature Product</th>
                                 <th>Feature Product Points</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {Array.isArray(productData) && productData.length > 0 && (
-                                productData.map((item, index) => (
-                                    <tr key={index}>
-                                        <td>{item.featureProduct}</td>
-                                        <td>
-                                            {item.featureProductPoints.map((point, pointIndex) => (
-                                                <div key={`${index}-${pointIndex}`}>
-                                                    {pointIndex + 1}. {point} {/* Counter for each point */}
-                                                </div>
-                                            ))}
-                                        </td>
-                                    </tr>
-                                ))
-                            )}
+                            {featureProducts.map((item, index) => (
+                                <tr key={index}>
+                                    <td>{item.featureProduct}</td>
+                                    <td>
+                                        {item.featureProductPoints.map((point, pointIndex) => (
+                                            <div key={`${index}-${pointIndex}`}>
+                                                {pointIndex + 1}. {point}
+                                            </div>
+                                        ))}
+                                    </td>
+                                    <td>
+                                        <Button
+                                            className="d-flex justify-content-center"
+                                            variant="outline-danger"
+                                            onClick={() => deleteFeatureProduct(index)}
+                                        >
+                                            <DeleteForeverIcon style={{ fontSize: "20px" }} />
+                                        </Button>
+                                    </td>
+                                </tr>
+                            ))}
                         </tbody>
                     </Table>
                 </Container>
