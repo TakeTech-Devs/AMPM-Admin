@@ -9,20 +9,21 @@ import {
     clearErrors,
     createProductBattery,
     createProductBatteryCard,
+    createProductFeatureBattery,
     createProductHeader,
+    deleteFeatureProductPoint,
     getProdcutData,
 } from '../Actions/ProductActions';
 import {
     ADD_BATTERY_ADMIN_RESET,
     ADD_BATTERYCARD_ADMIN_RESET,
+    ADD_FEATUREBATTERY_ADMIN_RESET,
     ADD_PRODUCTHEADER_ADMIN_RESET,
+    DELETE_FEATUREBATTERYPOINT_RESET,
 } from '../Constants/ProductConstants';
 
 const Product = () => {
-    const [highlights, setHighlights] = useState([]);
-    const [highlightInput, setHighlightInput] = useState('');
-    const [featureProductDescription, setFeatureProductDescription] = useState('');
-    const [featureProducts, setFeatureProducts] = useState([]);
+
 
     const dispatch = useDispatch();
 
@@ -57,6 +58,10 @@ const Product = () => {
         batteryCardThree: '',
     });
 
+    const [highlights, setHighlights] = useState([]);
+    const [highlightInput, setHighlightInput] = useState('');
+    const [featureProductDescription, setFeatureProductDescription] = useState('');
+
     const addHighlight = () => {
         if (!highlightInput.trim()) return;
         setHighlights([...highlights, highlightInput]);
@@ -65,25 +70,6 @@ const Product = () => {
 
     const deleteHighlight = (index) => {
         setHighlights(highlights.filter((_, i) => i !== index));
-    };
-
-    const addFeatureProduct = () => {
-        if (!featureProductDescription.trim() || highlights.length === 0) return;
-
-        setFeatureProducts([
-            ...featureProducts,
-            {
-                featureProduct: featureProductDescription,
-                featureProductPoints: highlights,
-            },
-        ]);
-
-        setFeatureProductDescription('');
-        setHighlights([]);
-    };
-
-    const deleteFeatureProduct = (index) => {
-        setFeatureProducts(featureProducts.filter((_, i) => i !== index));
     };
 
     useEffect(() => {
@@ -104,10 +90,12 @@ const Product = () => {
         }
 
         if (isUpdated) {
-            window.alert('Home Data Updated Successfully');
+            window.alert('Product Page Data Updated Successfully');
             dispatch({ type: ADD_PRODUCTHEADER_ADMIN_RESET });
             dispatch({ type: ADD_BATTERY_ADMIN_RESET });
             dispatch({ type: ADD_BATTERYCARD_ADMIN_RESET });
+            dispatch({ type: ADD_FEATUREBATTERY_ADMIN_RESET });
+            dispatch({ type: DELETE_FEATUREBATTERYPOINT_RESET });
             window.location.reload();
         }
 
@@ -151,6 +139,27 @@ const Product = () => {
     const handelBatteryCardInputSubmit = (e) => {
         e.preventDefault();
         dispatch(createProductBatteryCard(batteryCardData));
+    };
+
+    const handelFeatureBatteryInputSubmit = (e) => {
+        if (!featureProductDescription.trim() || highlights.length === 0) {
+            return;
+        }
+
+        const productData = {
+            featureProduct: featureProductDescription,
+            featureProductPoints: highlights
+        }
+
+        dispatch(createProductFeatureBattery(productData));
+
+        setFeatureProductDescription('');
+        setHighlights([]);
+    }
+
+    const handleDeletePoint = (productId, point) => {
+        console.log("Deleting point:", point); // Debugging to verify the point content
+        dispatch(deleteFeatureProductPoint(productId, point));
     };
 
 
@@ -264,76 +273,86 @@ const Product = () => {
                 <h3>Features</h3>
                 <Container>
                     <Row>
-                        <Col lg={12}>
-                            <Form.Control
-                                as="textarea"
-                                placeholder="Feature Product"
-                                value={featureProductDescription}
-                                onChange={(e) => setFeatureProductDescription(e.target.value)}
-                            />
-                        </Col>
-                        <Col lg={12} className="d-flex align-items-center">
-                            <Form.Control
-                                value={highlightInput}
-                                onChange={(e) => setHighlightInput(e.target.value)}
-                                type="text"
-                                placeholder="Add a highlight"
-                            />
-                            <Button onClick={addHighlight} variant="outline-success" className="ms-2">
-                                <AddIcon style={{ fontSize: "20px" }} />
-                            </Button>
-                        </Col>
-                        <Col lg={12} className="mt-2">
-                            {highlights.map((highlight, i) => (
-                                <div
-                                    key={i}
-                                    className="d-flex justify-content-between align-items-center p-2 mb-2 border rounded bg-light">
-                                    <span className="text">{highlight}</span>
-                                    <Button className="d-flex justify-content-center btn-highlight" variant="outline-danger" onClick={() => deleteHighlight(i)}>
-                                        <DeleteForeverIcon style={{ fontSize: "20px" }} />
-                                    </Button>
-                                </div>
-                            ))}
-                        </Col>
-                        <Col xs={12} className="d-flex justify-content-end gap-2 mt-2">
-                            <Button variant="danger" onClick={() => setHighlights([])}>
-                                Clear
-                            </Button>
-                            <Button variant="success" onClick={addFeatureProduct}>
-                                Submit
-                            </Button>
-                        </Col>
+                        <Form>
+                            <Col lg={12}>
+                                <Form.Control
+                                    as="textarea"
+                                    placeholder="Feature Product"
+                                    value={featureProductDescription}
+                                    onChange={(e) => setFeatureProductDescription(e.target.value)}
+                                />
+                            </Col>
+                            <Col lg={12} className="d-flex align-items-center">
+                                <Form.Control
+                                    value={highlightInput}
+                                    onChange={(e) => setHighlightInput(e.target.value)}
+                                    type="text"
+                                    placeholder="Add a highlight"
+                                />
+                                <Button onClick={addHighlight} variant="outline-success" className="ms-2">
+                                    <AddIcon style={{ fontSize: "20px" }} />
+                                </Button>
+                            </Col>
+                            <Col lg={12} className="mt-2">
+                                {highlights.map((highlight, i) => (
+                                    <div
+                                        key={i}
+                                        className="d-flex justify-content-between align-items-center p-2 mb-2 border rounded bg-light">
+                                        <span className="text">{highlight}</span>
+                                        <Button className="d-flex justify-content-center btn-highlight" variant="outline-danger" onClick={() => deleteHighlight(i)}>
+                                            <DeleteForeverIcon style={{ fontSize: "20px" }} />
+                                        </Button>
+                                    </div>
+                                ))}
+                            </Col>
+                            <Col xs={12} className="d-flex justify-content-end gap-2 mt-2">
+                                <Button variant="danger" onClick={() => setHighlights([])}>
+                                    Clear
+                                </Button>
+                                <Button variant="success" onClick={handelFeatureBatteryInputSubmit}>
+                                    Submit
+                                </Button>
+                            </Col>
+                        </Form>
                     </Row>
                     <Table bordered hover responsive>
                         <thead>
                             <tr>
                                 <th>Feature Product</th>
                                 <th>Feature Product Points</th>
-                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {featureProducts.map((item, index) => (
-                                <tr key={index}>
-                                    <td>{item.featureProduct}</td>
-                                    <td>
-                                        {item.featureProductPoints.map((point, pointIndex) => (
-                                            <div key={`${index}-${pointIndex}`}>
-                                                {pointIndex + 1}. {point}
-                                            </div>
-                                        ))}
-                                    </td>
-                                    <td>
-                                        <Button
-                                            className="d-flex justify-content-center"
-                                            variant="outline-danger"
-                                            onClick={() => deleteFeatureProduct(index)}
-                                        >
-                                            <DeleteForeverIcon style={{ fontSize: "20px" }} />
-                                        </Button>
-                                    </td>
-                                </tr>
-                            ))}
+
+                            {Array.isArray(productData) && productData.length > 0 && (
+                                productData.map((item, index) => (
+                                    <tr key={index}>
+                                        <td style={{ width: "600px" }}>{item.featureProduct}</td>
+                                        <td>
+                                            {item.featureProductPoints.map((point, pointIndex) => (
+                                                <div
+                                                    key={`${index}-${pointIndex}`}
+                                                    style={{
+                                                        display: "flex",
+                                                        alignItems: "center", // Aligns items vertically
+                                                        justifyContent: "space-between",
+                                                        marginBottom: "8px", // Adds space between items
+                                                    }}
+                                                >
+                                                    <span>{pointIndex + 1}. {   }</span>
+                                                    <Button
+                                                        variant="outline-danger"
+                                                        onClick={() => handleDeletePoint(item._id, point)}
+                                                        style={{ padding: "4px", minWidth: "32px" }} // Optional styling for button
+                                                    >
+                                                        <DeleteForeverIcon style={{ fontSize: "20px" }} />
+                                                    </Button>
+                                                </div>
+                                            ))}
+                                        </td>
+                                    </tr>
+                                ))
+                            )}
                         </tbody>
                     </Table>
                 </Container>

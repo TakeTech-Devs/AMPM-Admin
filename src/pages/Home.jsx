@@ -75,7 +75,7 @@ function Home() {
     }
 
     if (isUpdated) {
-      window.alert('Home Data Updated Successfully');
+      window.alert('Home Page Data Updated Successfully');
       dispatch({ type: ADD_HOMEHEADER_ADMIN_RESET });
       dispatch({ type: ADD_HOMEHEADERCARD_ADMIN_RESET });
       dispatch({ type: ADD_HOMEBATTARIE_ADMIN_RESET });

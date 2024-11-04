@@ -15,6 +15,14 @@ import {
     ADD_BATTERYCARD_ADMIN_SUCCESS,
     ADD_BATTERYCARD_ADMIN_FAIL,
     ADD_BATTERYCARD_ADMIN_RESET,
+    ADD_FEATUREBATTERY_ADMIN_REQUEST,
+    ADD_FEATUREBATTERY_ADMIN_SUCCESS,
+    ADD_FEATUREBATTERY_ADMIN_FAIL,
+    ADD_FEATUREBATTERY_ADMIN_RESET,
+    DELETE_FEATUREBATTERYPOINT_REQUEST,
+    DELETE_FEATUREBATTERYPOINT_SUCCESS,
+    DELETE_FEATUREBATTERYPOINT_FAIL,
+    DELETE_FEATUREBATTERYPOINT_RESET,
 } from '../Constants/ProductConstants';
 
 export const productDataReducer = (state = { productData: [] }, action) => {
@@ -51,6 +59,8 @@ export const newProductData = (state = { product: {} }, action) => {
         case ADD_PRODUCTHEADER_ADMIN_REQUEST:
         case ADD_BATTERY_ADMIN_REQUEST:
         case ADD_BATTERYCARD_ADMIN_REQUEST:
+        case ADD_FEATUREBATTERY_ADMIN_REQUEST:
+        case DELETE_FEATUREBATTERYPOINT_REQUEST:
             return {
                 ...state,
                 loading: true,
@@ -58,6 +68,8 @@ export const newProductData = (state = { product: {} }, action) => {
         case ADD_PRODUCTHEADER_ADMIN_SUCCESS:
         case ADD_BATTERY_ADMIN_SUCCESS:
         case ADD_BATTERYCARD_ADMIN_SUCCESS:
+        case ADD_FEATUREBATTERY_ADMIN_SUCCESS:
+        case DELETE_FEATUREBATTERYPOINT_SUCCESS:
             return {
                 ...state,
                 loading: false,
@@ -66,6 +78,8 @@ export const newProductData = (state = { product: {} }, action) => {
         case ADD_PRODUCTHEADER_ADMIN_FAIL:
         case ADD_BATTERY_ADMIN_FAIL:
         case ADD_BATTERYCARD_ADMIN_FAIL:
+        case ADD_FEATUREBATTERY_ADMIN_FAIL:
+        case DELETE_FEATUREBATTERYPOINT_FAIL:
             return {
                 ...state,
                 loading: false,
@@ -74,6 +88,8 @@ export const newProductData = (state = { product: {} }, action) => {
         case ADD_PRODUCTHEADER_ADMIN_RESET:
         case ADD_BATTERY_ADMIN_RESET:
         case ADD_BATTERYCARD_ADMIN_RESET:
+        case ADD_FEATUREBATTERY_ADMIN_RESET:
+        case DELETE_FEATUREBATTERYPOINT_RESET:
             return {
                 ...state,
                 isUpdated: false,

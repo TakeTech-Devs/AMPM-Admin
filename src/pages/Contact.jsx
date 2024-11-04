@@ -43,7 +43,7 @@ const Contact = () => {
         }
 
         if (isUpdated) {
-            window.alert('Section updated successfully');
+            window.alert('Contact Page Data updated successfully');
             dispatch({ type: ADD_CONTACT_ADMIN_RESET });
             window.location.reload()
         }

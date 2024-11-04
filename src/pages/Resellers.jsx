@@ -33,7 +33,7 @@ const Resellers = () => {
         }
 
         if (isApproved) {
-            window.alert("Product Approve Successfully");
+            window.alert("Reseller Approve Successfully");
             // navigate("/admin/products");
             dispatch({ type: RESELLER_APPROVE_RESET });
 

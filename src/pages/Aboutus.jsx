@@ -57,7 +57,7 @@ function Aboutus() {
     }
 
     if (isUpdated) {
-      window.alert('Home Data Updated Successfully');
+      window.alert('About Us Page Data Updated Successfully');
       dispatch({ type: ADD_ABOUTHEADER_ADMIN_RESET });
       dispatch({ type: ADD_ABOUTMISSION_ADMIN_RESET });
       dispatch({ type: ADD_ABOUTWEDO_ADMIN_RESET });

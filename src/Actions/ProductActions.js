@@ -12,6 +12,12 @@ import {
     ADD_BATTERYCARD_ADMIN_REQUEST,
     ADD_BATTERYCARD_ADMIN_SUCCESS,
     ADD_BATTERYCARD_ADMIN_FAIL,
+    ADD_FEATUREBATTERY_ADMIN_REQUEST,
+    ADD_FEATUREBATTERY_ADMIN_SUCCESS,
+    ADD_FEATUREBATTERY_ADMIN_FAIL,
+    DELETE_FEATUREBATTERYPOINT_REQUEST,
+    DELETE_FEATUREBATTERYPOINT_SUCCESS,
+    DELETE_FEATUREBATTERYPOINT_FAIL,
 } from '../Constants/ProductConstants';
 import axios from 'axios';
 
@@ -98,6 +104,58 @@ export const createProductBatteryCard = (Data) => async(dispatch) =>{
         });
     }
 }
+
+export const createProductFeatureBattery = (Data) => async(dispatch) =>{
+    try {
+        dispatch({ type: ADD_FEATUREBATTERY_ADMIN_REQUEST });
+
+        const config = {
+            headers: { "Content-Type": "application/json" }, withCredentials: true
+        }
+
+        const { data } = await axios.post(`http://localhost:5000/api/v1/admin/create-featureProduct`, Data, config);
+
+        dispatch({
+            type: ADD_FEATUREBATTERY_ADMIN_SUCCESS,
+            payload: data.success
+        });
+
+    } catch (error) {
+        dispatch({
+            type: ADD_FEATUREBATTERY_ADMIN_FAIL,
+            payload: error.response?.data.message,
+        });
+    }
+}
+
+export const deleteFeatureProductPoint = (id, pointToRemove) => async (dispatch) => {
+    try {
+        dispatch({ type: DELETE_FEATUREBATTERYPOINT_REQUEST });
+
+        const config = {
+            headers: { "Content-Type": "application/json" },
+            withCredentials: true,
+            data: { pointToRemove }, // Send pointToRemove in request body
+        };
+
+        const { data } = await axios.request({
+            method: "DELETE",
+            url: `http://localhost:5000/api/v1/admin/product/feature-point/${id}`,
+            ...config,
+        });
+
+        dispatch({
+            type: DELETE_FEATUREBATTERYPOINT_SUCCESS,
+            payload: data.success,
+        });
+
+    } catch (error) {
+        dispatch({
+            type: DELETE_FEATUREBATTERYPOINT_FAIL,
+            payload: error.response?.data.message,
+        });
+    }
+};
 
 export const clearErrors = () => async (dispatch) => {
     dispatch({ type: CLEAR_ERRORS });
