@@ -339,11 +339,11 @@ const Product = () => {
                                                         marginBottom: "8px", // Adds space between items
                                                     }}
                                                 >
-                                                    <span>{pointIndex + 1}. {   }</span>
+                                                    <span>{pointIndex + 1}. {  }</span>
                                                     <Button
                                                         variant="outline-danger"
                                                         onClick={() => handleDeletePoint(item._id, point)}
-                                                        style={{ padding: "4px", minWidth: "32px" }} // Optional styling for button
+                                                        style={{ padding: "4px", minWidth: "32px" }} 
                                                     >
                                                         <DeleteForeverIcon style={{ fontSize: "20px" }} />
                                                     </Button>
