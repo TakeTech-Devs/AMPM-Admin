@@ -16,12 +16,13 @@ import {
     ADD_NEW_ADMIN_FAIL,
 } from '../Constants/AdminConstants';
 import axios from 'axios';
+import baseUrl from '../helper';
 
 export const getAdmin = () => async (dispatch) => {
     try {
         dispatch({ type: GET_ADMIN_ADMIN_REQUEST });
 
-        const { data } = await axios.get(`http://localhost:5000/api/v1/admin/admins`);
+        const { data } = await axios.get(`${baseUrl}/api/v1/admin/admins`);
 
         dispatch({ type: GET_ADMIN_ADMIN_SUCCESS, payload: data });
     } catch (error) {
@@ -35,7 +36,7 @@ export const adminLogin = (email, password) => async (dispatch) => {
 
         const config = { headers: { "Content-Type": "application/json" }, withCredentials: true };
 
-        const { data } = await axios.post(`http://localhost:5000/api/v1/admin/admin-login`, { email, password }, config);
+        const { data } = await axios.post(`${baseUrl}/api/v1/admin/admin-login`, { email, password }, config);
 
         dispatch({
             type: ADMIN_LOGIN_SUCCESS,
@@ -50,7 +51,7 @@ export const loadAdmin = () => async (dispatch) => {
     try {
         dispatch({ type: LOAD_ADMIN_REQUEST });
 
-        const { data } = await axios.get(`http://localhost:5000/api/v1/admin/profile`, { withCredentials: true });
+        const { data } = await axios.get(`${baseUrl}/api/v1/admin/profile`, { withCredentials: true });
 
         dispatch({ type: LOAD_ADMIN_SUCCESS, payload: data.user });
     } catch (error) {
@@ -60,7 +61,7 @@ export const loadAdmin = () => async (dispatch) => {
 
 export const logout = () => async (dispatch) => {
     try {
-        await axios.get(`http://localhost:5000/api/v1/admin/logout`,{withCredentials:true});
+        await axios.get(`${baseUrl}/api/v1/admin/logout`,{withCredentials:true});
         dispatch({ type: LOGOUT_SUCCESS });
         console.log("hi")
     } catch (error) {
@@ -76,7 +77,7 @@ export const addAdmin = (Data) => async (dispatch) => {
     }
 
     try {
-        const response = await axios.post(`http://localhost:5000/api/v1/admin/admin-register`,  Data , config);
+        const response = await axios.post(`${baseUrl}/api/v1/admin/admin-register`,  Data , config);
 
         dispatch({ type: ADD_NEW_ADMIN_SUCCESS, payload: response.data });
     } catch (error) {

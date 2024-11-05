@@ -8,12 +8,13 @@ import {
     ADD_CONTACT_ADMIN_FAIL,
 } from '../Constants/ContactConstants';
 import axios from 'axios';
+import baseUrl from '../helper';
 
 export const getContact = () => async (dispatch) => {
     try {
         dispatch({ type: GET_ADMIN_CONTACT_REQUEST });
 
-        const { data } = await axios.get(`http://localhost:5000/api/v1/get-contactInfo`);
+        const { data } = await axios.get(`${baseUrl}/api/v1/get-contactInfo`);
 
         dispatch({ type: GET_ADMIN_CONTACT_SUCCESS, payload: data });
     } catch (error) {
@@ -29,7 +30,7 @@ export const createContact = (HeaderData) => async(dispatch) =>{
             headers: { "Content-Type": "application/json" }, withCredentials: true
         }
 
-        const { data } = await axios.post(`http://localhost:5000/api/v1/admin/create-contactInfo`, HeaderData, config);
+        const { data } = await axios.post(`${baseUrl}/api/v1/admin/create-contactInfo`, HeaderData, config);
 
         dispatch({
             type: ADD_CONTACT_ADMIN_SUCCESS,

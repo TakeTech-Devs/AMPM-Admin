@@ -5,12 +5,13 @@ import {
     CLEAR_ERRORS,
 } from '../Constants/ConsumerConstants';
 import axios from 'axios';
+import baseUrl from '../helper';
 
 export const getConsumers = () => async (dispatch) => {
     try {
         dispatch({ type: GET_ADMIN_CONSUMER_REQUEST });
 
-        const { data } = await axios.get(`http://localhost:5000/api/v1/admin/consumer`);
+        const { data } = await axios.get(`${baseUrl}/api/v1/admin/consumer`);
 
         dispatch({ type: GET_ADMIN_CONSUMER_SUCCESS, payload: data });
     } catch (error) {

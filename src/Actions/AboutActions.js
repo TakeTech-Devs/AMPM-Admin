@@ -14,12 +14,13 @@ import {
     ADD_ABOUTWEDO_ADMIN_FAIL,
 } from '../Constants/AboutConstants';
 import axios from 'axios';
+import baseUrl from '../helper';
 
 export const getAbout = () => async (dispatch) => {
     try {
         dispatch({ type: GET_ADMIN_ABOUT_REQUEST });
 
-        const { data } = await axios.get(`http://localhost:5000/api/v1/get-about`);
+        const { data } = await axios.get(`${baseUrl}/api/v1/get-about`);
 
         dispatch({ type: GET_ADMIN_ABOUT_SUCCESS, payload: data });
     } catch (error) {
@@ -35,7 +36,7 @@ export const createAboutHeader = (HeaderData) => async(dispatch) =>{
             headers: { "Content-Type": "application/json" }, withCredentials: true
         }
 
-        const { data } = await axios.post(`http://localhost:5000/api/v1/admin/create-aboutHeader`, HeaderData, config);
+        const { data } = await axios.post(`${baseUrl}/api/v1/admin/create-aboutHeader`, HeaderData, config);
 
         dispatch({
             type: ADD_ABOUTHEADER_ADMIN_SUCCESS,
@@ -58,7 +59,7 @@ export const createAboutMission = (Data) => async(dispatch) =>{
             headers: { "Content-Type": "application/json" }, withCredentials: true
         }
 
-        const { data } = await axios.post(`http://localhost:5000/api/v1/admin/create-aboutMission`, Data, config);
+        const { data } = await axios.post(`${baseUrl}/api/v1/admin/create-aboutMission`, Data, config);
 
         dispatch({
             type: ADD_ABOUTMISSION_ADMIN_SUCCESS,
@@ -81,7 +82,7 @@ export const createAboutWeDo = (Data) => async(dispatch) =>{
             headers: { "Content-Type": "application/json" }, withCredentials: true
         }
 
-        const { data } = await axios.post(`http://localhost:5000/api/v1/admin/create-aboutWeDo`, Data, config);
+        const { data } = await axios.post(`${baseUrl}/api/v1/admin/create-aboutWeDo`, Data, config);
 
         dispatch({
             type: ADD_ABOUTWEDO_ADMIN_SUCCESS,

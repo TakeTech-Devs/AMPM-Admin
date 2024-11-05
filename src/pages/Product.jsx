@@ -339,14 +339,12 @@ const Product = () => {
                                                         marginBottom: "8px",
                                                     }}
                                                 >
-                                                    <span>{pointIndex + 1}. {  }</span>
                                                     <span style={{marginBottom:"20px"}}>{pointIndex + 1}. {point}</span>
                                                     <Button
                                                         variant="outline-danger"
                                                         className='d-flex align-items-center justify-content-center'
                                                         onClick={() => handleDeletePoint(item._id, point)}
                                                         style={{ padding: "4px", minWidth: "32px" }} 
-                                                        style={{ padding: "4px", minWidth: "30px" }}
                                                     >
                                                         <DeleteForeverIcon style={{ fontSize: "20px" }} />
                                                     </Button>
