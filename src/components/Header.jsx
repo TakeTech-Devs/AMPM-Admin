@@ -60,11 +60,11 @@ function Header() {
           </div> */}
           <div className="profile">
             <div className="photo">
-              <img src={userIcon} alt="Admin logo" />
+              {/* <img src={userIcon} alt="Admin logo" /> */}
             </div>
             <div className="details ">
-              <h4>{user ? user.name : "Loading..."}</h4>
-              <p>Founder</p>
+              <h4><b>Welcome,&nbsp;{user ? user.name : "Loading..."}</b></h4>
+              {/* <p>Founder</p> */}
             </div>
           </div>
         </div>
