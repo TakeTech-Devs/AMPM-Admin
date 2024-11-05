@@ -334,16 +334,17 @@ const Product = () => {
                                                     key={`${index}-${pointIndex}`}
                                                     style={{
                                                         display: "flex",
-                                                        alignItems: "center", // Aligns items vertically
+                                                        alignItems: "center", 
                                                         justifyContent: "space-between",
-                                                        marginBottom: "8px", // Adds space between items
+                                                        marginBottom: "8px",
                                                     }}
                                                 >
-                                                    <span>{pointIndex + 1}. {   }</span>
+                                                    <span style={{marginBottom:"20px"}}>{pointIndex + 1}. {point}</span>
                                                     <Button
                                                         variant="outline-danger"
+                                                        className='d-flex align-items-center justify-content-center'
                                                         onClick={() => handleDeletePoint(item._id, point)}
-                                                        style={{ padding: "4px", minWidth: "32px" }} // Optional styling for button
+                                                        style={{ padding: "4px", minWidth: "30px" }}
                                                     >
                                                         <DeleteForeverIcon style={{ fontSize: "20px" }} />
                                                     </Button>
