@@ -141,7 +141,7 @@ const Orders = () => {
                     <Modal.Title>Order Update - {selectedOrder?._id}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form onSubmit={submitOrderUpdate}>
+                    <Form>
                         <Form.Group className="mb-3" controlId="formOrderStatus">
                             <Form.Label>Update Order Status</Form.Label>
                             <Form.Select
@@ -164,7 +164,7 @@ const Orders = () => {
                     <Button variant="danger" onClick={handleCloseEditForm}>
                         Close
                     </Button>
-                    <Button variant="success" type="submit">
+                    <Button variant="success" type="submit" onClick={submitOrderUpdate}>
                         Submit
                     </Button>
                 </Modal.Footer>

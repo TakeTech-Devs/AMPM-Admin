@@ -5,6 +5,7 @@ import "../styles/Global.scss";
 import { useDispatch, useSelector } from 'react-redux';
 import { approveReseller, clearErrors, getReseller } from '../Actions/ResellerActions';
 import { RESELLER_APPROVE_RESET } from '../Constants/ResellerConstants';
+import Swal from 'sweetalert2'
 
 const Resellers = () => {
     const dispatch = useDispatch();
@@ -23,8 +24,65 @@ const Resellers = () => {
 
     const approveProductHandler = (id) => {
         dispatch(approveReseller(id));
-        window.location.reload();
+        // window.location.reload();
     }
+
+    // const showAlert = () =>{
+    //     Swal.fire({
+    //         title: 'Error!',
+    //         text: 'Do you want to continue',
+    //         icon: 'error',
+    //         confirmButtonText: 'Cool'
+    //       })
+    // }
+
+    const showApproveAlert = (id) => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'Do you want to approve this reseller?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, approve it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                approveProductHandler(id); // Call the function here if confirmed
+                Swal.fire(
+                    'Approved!',
+                    'The reseller has been approved successfully.',
+                    'success'
+                ).then(() => {
+                    window.location.reload(); // Reload the page after clicking OK
+                });
+            }
+        });
+    };
+
+    const showAlert = (id) =>{
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'Do you want to disapprove this reseller?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, disapprove it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                approveProductHandler(id); // Call the function here if confirmed
+                Swal.fire(
+                    'Disapprove!',
+                    'The reseller has been disapprove successfully.',
+                    'success'
+                ).then(() => {
+                    window.location.reload(); // Reload the page after clicking OK
+                });
+            }
+        });
+    }
+
+    
 
     useEffect(() => {
         if (approveError) {
@@ -73,9 +131,11 @@ const Resellers = () => {
                                         <td>{user.businessWebsite || "N/A"}</td>
                                         <td>
                                             {user.approvalStatus ? (
-                                                <Button variant="success" onClick={() => approveProductHandler(user._id)}>Approved</Button>
+                                                // <Button variant="success" onClick={() => approveProductHandler(user._id)}>Approved</Button>
+                                                <Button variant="success" onClick={() => showAlert(user._id)}>Approved</Button>
                                             ) : (
-                                                <Button variant="danger" onClick={() => approveProductHandler(user._id)}>Not Approved</Button>
+                                                // <Button variant="danger" onClick={() => approveProductHandler(user._id)}>Not Approved</Button>
+                                                <Button variant="danger" onClick={() => showApproveAlert(user._id)}>Not Approved</Button>
                                             )}
                                         </td>
                                     </tr>
