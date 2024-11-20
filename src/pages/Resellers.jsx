@@ -8,6 +8,7 @@ import { RESELLER_APPROVE_RESET } from '../Constants/ResellerConstants';
 import Swal from 'sweetalert2';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
 import BlockIcon from '@mui/icons-material/Block';
+import FileDownloadIcon from '@mui/icons-material/FileDownload';
 
 const Resellers = () => {
     const dispatch = useDispatch();
@@ -162,24 +163,27 @@ const Resellers = () => {
             <div className="cardbox">
                 <h3>Reseller List</h3>
                 <Container>
-                    <Form.Group controlId="filter">
-                        <Form.Label>Filter by Registration Date</Form.Label>
-                        <Form.Control
-                            as="select"
-                            value={duration}
-                            onChange={(e) => setDuration(e.target.value)}
-                        >
-                            <option value="">All</option>
-                            <option value="3months">Last 3 Months</option>
-                            <option value="6months">Last 6 Months</option>
-                            <option value="1year">Last 1 Year</option>
-                        </Form.Control>
-                    </Form.Group>
-
-                    <div className="text-end my-3">
-                        <Button variant="success" onClick={exportToCSV}>
-                            Export to CSV
-                        </Button>
+                    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "5px" }}>
+                        <Form.Group controlId="filter" style={{ flex: 1 }}>
+                            <Form.Label style={{ paddingRight: "15px" }}>Filter by Registration Date</Form.Label>
+                            <Form.Select
+                                style={{ width: "70%", display: "inline-block", marginRight: "10px" }}
+                                value={duration}
+                                onChange={(e) => setDuration(e.target.value)}
+                            >
+                                <option value="">All</option>
+                                <option value="3months">Last 3 Months</option>
+                                <option value="6months">Last 6 Months</option>
+                                <option value="1year">Last 1 Year</option>
+                            </Form.Select>
+                            <Button
+                                variant="success"
+                                onClick={exportToCSV}
+                                style={{ marginTop: "13px", height: "fit-content" }}
+                            >
+                                <FileDownloadIcon />
+                            </Button>
+                        </Form.Group>
                     </div>
 
                     <Table bordered hover responsive>

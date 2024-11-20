@@ -12,6 +12,7 @@ import Orders from "../pages/Orders";
 import Login from "../pages/Login";
 import { Admins } from "../pages/Admins";
 import { useSelector } from "react-redux";
+import { Discount } from "@mui/icons-material";
 
 function Main() {
   const location = useLocation();
@@ -40,6 +41,7 @@ function Main() {
           <Route path="/aboutus" element={<Aboutus />} />
           <Route path="/product" element={<Product />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/discount" element={<Discount />} />
           <Route path="/consumers" element={<Users />} />
           <Route path="/resellers" element={<Resellers />} />
           <Route path="/orders" element={<Orders />} />
