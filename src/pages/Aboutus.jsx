@@ -116,10 +116,10 @@ function Aboutus() {
           <Row>
             <Form onSubmit={handelHeaderInputSubmit}>
               <Col lg={12}>
-                <Form.Control type="text" placeholder="Normal text" name='headerTitle' value={headerData.headerTitle} onChange={handelHeaderInput} />
+                <Form.Control type="text" placeholder="Enter New Banner Title" name='headerTitle' value={headerData.headerTitle} onChange={handelHeaderInput} />
               </Col>
               <Col lg={12}>
-                <Form.Control as="textarea" placeholder="Normal text" name='headerDescription' value={headerData.headerDescription} onChange={handelHeaderInput} />
+                <Form.Control as="textarea" placeholder="Enter New Banner Description" name='headerDescription' value={headerData.headerDescription} onChange={handelHeaderInput} />
               </Col>
               <Col xs={12} className=" d-flex justify-content-end gap-2">
                 <Button variant="danger">Cancel</Button>
@@ -159,10 +159,10 @@ function Aboutus() {
           <Row>
             <Form onSubmit={handelMissionInputSubmit}>
               <Col lg={12}>
-                <Form.Control type="text" placeholder="Normal text" name='ourMissionTitle' value={missionData.ourMissionTitle} onChange={handelMissionInput}/>
+                <Form.Control type="text" placeholder="Enter Our Mission Title" name='ourMissionTitle' value={missionData.ourMissionTitle} onChange={handelMissionInput}/>
               </Col>
               <Col lg={12}>
-                <Form.Control as="textarea" placeholder="Normal text" name='ourMissionDescription' value={missionData.ourMissionDescription} onChange={handelMissionInput}/>
+                <Form.Control as="textarea" placeholder="Enter Our Mission Description" name='ourMissionDescription' value={missionData.ourMissionDescription} onChange={handelMissionInput}/>
               </Col>
               <Col xs={12} className=" d-flex justify-content-end gap-2">
                 <Button variant="danger">Cancel</Button>
@@ -202,10 +202,10 @@ function Aboutus() {
           <Row>
             <Form onSubmit={handelWeDoInputSubmit}>
             <Col lg={12}>
-              <Form.Control type="text" placeholder="Normal text" name='weDoTitle' value={weDoData.weDoTitle} onChange={handelWeDoInput}/>
+              <Form.Control type="text" placeholder="Enter What We Do Title" name='weDoTitle' value={weDoData.weDoTitle} onChange={handelWeDoInput}/>
             </Col>
             <Col lg={12}>
-              <Form.Control as="textarea" placeholder="Normal text" name='weDoDescription' value={weDoData.weDoDescription} onChange={handelWeDoInput}/>
+              <Form.Control as="textarea" placeholder="Enter What We Do Description" name='weDoDescription' value={weDoData.weDoDescription} onChange={handelWeDoInput}/>
             </Col>
             <Col xs={12} className=" d-flex justify-content-end gap-2">
               <Button variant="danger">Cancel</Button>

@@ -8,6 +8,7 @@ import { logout } from "../Actions/AdminAction";
 import HomeIcon from '@mui/icons-material/Home';
 import InfoIcon from '@mui/icons-material/Info';
 import Inventory2Icon from '@mui/icons-material/Inventory2';
+import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 import StorefrontIcon from '@mui/icons-material/Storefront';
@@ -55,14 +56,14 @@ function Sidebar() {
                 About Us
               </li>
             </NavLink>
-            <NavLink to="/product" className={({ isActive }) => isActive ? "sidebar-link active" : "sidebar-link"}>
+            {/* <NavLink to="/product" className={({ isActive }) => isActive ? "sidebar-link active" : "sidebar-link"}>
               <li>
                 <div className="icon1 d-flex align-items-center justify-content-center">
                   <Inventory2Icon style={{ fontSize: 25, color: "#47ad01" }} />
                 </div>
                 Product
               </li>
-            </NavLink>
+            </NavLink> */}
             <NavLink to="/contact" className={({ isActive }) => isActive ? "sidebar-link active" : "sidebar-link"}>
               <li>
                 <div className="icon1 d-flex align-items-center justify-content-center">
@@ -71,6 +72,14 @@ function Sidebar() {
                 Contact
               </li>
             </NavLink>
+            {/* <NavLink to="/discount" className={({ isActive }) => isActive ? "sidebar-link active" : "sidebar-link"}>
+              <li>
+                <div className="icon1 d-flex align-items-center justify-content-center">
+                  <LocalOfferIcon style={{ fontSize: 25, color: "#47ad01" }} />
+                </div>
+                Discount
+              </li>
+            </NavLink> */}
             <NavLink to="/consumers" className={({ isActive }) => isActive ? "sidebar-link active" : "sidebar-link"}>
               <li>
                 <div className="icon1 d-flex align-items-center justify-content-center">
