@@ -3,6 +3,8 @@ import '../styles/Login.scss';
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { adminLogin } from '../Actions/AdminAction';
+// import logo from "../assets/company-logo.png";
+import logo from "../assets/login-page-logo.png";
 
 function Login() {
 
@@ -33,7 +35,8 @@ function Login() {
           <div className="col-lg-3 col-md-2"></div>
           <div className="col-lg-6 col-md-8 login-box">
             <div className="login-key">
-              <i className="fa fa-key" aria-hidden="true"></i>
+              {/* <i className="fa fa-key" aria-hidden="true"></i> */}
+              <img src={logo} />
             </div>
             <div className="login-title">
               ADMIN PANEL
