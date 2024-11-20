@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Nav, Form, Button } from "react-bootstrap";
 import "../styles/Dashboard.scss";
 import "../styles/Global.scss";
 import userIcon from "../assets/user.png";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 function Header() {
 
   const {user, loading, isAuthenticated} = useSelector((state) => state.adminLogin);
+
 
   return (
     <>

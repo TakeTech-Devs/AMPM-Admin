@@ -7,17 +7,24 @@ import {
 import axios from 'axios';
 import baseUrl from '../helper';
 
-export const getConsumers = () => async (dispatch) => {
+export const getConsumers = (duration = "") => async (dispatch) => {
     try {
         dispatch({ type: GET_ADMIN_CONSUMER_REQUEST });
 
-        const { data } = await axios.get(`${baseUrl}/api/v1/admin/consumer`);
+        const { data } = await axios.get(`${baseUrl}/api/v1/admin/consumer`, {
+            params: { duration },
+        });
 
-        dispatch({ type: GET_ADMIN_CONSUMER_SUCCESS, payload: data });
+        console.log("API Response:", data); // Debug the API response structure
+        dispatch({ type: GET_ADMIN_CONSUMER_SUCCESS, payload: data }); // Pass the entire response
     } catch (error) {
-        dispatch({ type: GET_ADMIN_CONSUMER_FAIL, payload: error.response.data.message });
+        console.error("Error fetching consumers:", error); // Log error details
+        dispatch({
+            type: GET_ADMIN_CONSUMER_FAIL,
+            payload: error.response?.data?.message || "Something went wrong",
+        });
     }
-}
+};
 
 export const clearErrors = () => async (dispatch) => {
     dispatch({ type: CLEAR_ERRORS });

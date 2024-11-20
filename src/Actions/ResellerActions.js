@@ -11,15 +11,17 @@ import axios from 'axios';
 import baseUrl from '../helper';
 
 
-export const getReseller = () => async (dispatch) => {
+export const getReseller = (duration = "") => async (dispatch) => {
     try {
         dispatch({ type: GET_ADMIN_RESELLER_REQUEST });
 
-        const { data } = await axios.get(`${baseUrl}/api/v1/admin/resellers`);
+        const { data } = await axios.get(`${baseUrl}/api/v1/admin/resellers`,{
+            params: { duration },
+        });
 
         dispatch({ type: GET_ADMIN_RESELLER_SUCCESS, payload: data });
     } catch (error) {
-        dispatch({ type: GET_ADMIN_RESELLER_FAIL, payload: error.response.data.message });
+        dispatch({ type: GET_ADMIN_RESELLER_FAIL, payload: error.response?.data?.message });
     }
 }
 

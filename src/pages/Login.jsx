@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../styles/Login.scss';
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { adminLogin } from '../Actions/AdminAction';
+import { adminLogin, clearErrors } from '../Actions/AdminAction';
 // import logo from "../assets/company-logo.png";
 import logo from "../assets/login-page-logo.png";
 
@@ -25,6 +25,13 @@ function Login() {
     //   window.location.reload();
     // }, 250); // 1 second delay
   };
+
+  useEffect(() =>{
+    if (error){
+      window.alert(error);
+      dispatch(clearErrors());
+    }
+  }, [dispatch, error])
 
 
 

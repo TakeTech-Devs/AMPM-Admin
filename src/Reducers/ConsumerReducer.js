@@ -5,7 +5,7 @@ import {
     CLEAR_ERRORS,
 } from '../Constants/ConsumerConstants';
 
-export const consumerReducer = (state = { consumer: [] }, action) => {
+export const consumerReducer = (state = { consumers: [] }, action) => {
     switch (action.type) {
         case GET_ADMIN_CONSUMER_REQUEST:
             return {
@@ -13,17 +13,19 @@ export const consumerReducer = (state = { consumer: [] }, action) => {
                 loading: true,
             };
         case GET_ADMIN_CONSUMER_SUCCESS:
+            console.log("Action Payload:", action.payload); // Debug the entire payload
+            console.log("Consumers:", action.payload.consumers); // Log the key in the payload
             return {
                 ...state,
                 loading: false,
-                consumer: action.payload.consumer,
-            }
+                consumers: action.payload.consumers || [], // Use "consumers" from the API response
+            };
         case GET_ADMIN_CONSUMER_FAIL:
             return {
                 ...state,
                 loading: false,
                 error: action.payload,
-            }
+            };
         case CLEAR_ERRORS:
             return {
                 ...state,
@@ -32,4 +34,4 @@ export const consumerReducer = (state = { consumer: [] }, action) => {
         default:
             return state;
     }
-}
+};
