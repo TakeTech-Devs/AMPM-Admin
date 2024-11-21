@@ -7,11 +7,16 @@ import { clearErrors, getOrder, updateOrder } from '../Actions/OrderActions';
 import EditIcon from '@mui/icons-material/Edit';
 import Modal from 'react-bootstrap/Modal';
 import { UPDATE_ADMIN_ORDER_RESET } from '../Constants/OrderConstants';
+import HowToRegIcon from '@mui/icons-material/HowToReg';
+import BlockIcon from '@mui/icons-material/Block';
+import FileDownloadIcon from '@mui/icons-material/FileDownload';
 
 
 const Orders = () => {
 
     const dispatch = useDispatch();
+
+    const [duration, setDuration] = useState("");
 
     const { orders, error, loading } = useSelector((state) => state.adminOrders);
 
@@ -22,8 +27,8 @@ const Orders = () => {
             alert(error);
             dispatch(clearErrors());
         }
-        dispatch(getOrder());
-    }, [dispatch, error]);
+        dispatch(getOrder(duration));
+    }, [dispatch, error, duration]);
 
     const [showEditForm, setShowEditForm] = useState(false);
     const [selectedOrder, setSelectedOrder] = useState(null);
@@ -60,6 +65,67 @@ const Orders = () => {
         }
     };
 
+    const exportToCSV = () => {
+        if (!orders || orders.length === 0) {
+            alert("No data available to export.");
+            return;
+        }
+
+        // Prepare the CSV header and rows
+        const headers = [
+            "Order ID",
+            "Shipping Info",
+            "Order Items",
+            "Amount",
+            "Order Date",
+            "Order Status",
+        ];
+
+        // Reverse the data rows
+        let totalAmount = 0; // Initialize total amount
+    const rows = orders
+        .slice()
+        .reverse() // Reverse the array for most recent orders first
+        .map((order) => {
+            totalAmount += order.totalPrice || 0; // Add each order's totalPrice to the total amount
+
+            return [
+                order._id || "N/A",
+                `${order.shippingInfo?.firstName || "N/A"} ${order.shippingInfo?.lastName || "N/A"}, 
+                ${order.shippingInfo?.address || "N/A"}, ${order.shippingInfo?.city || "N/A"}, 
+                ${order.shippingInfo?.pin || "N/A"}, ${order.shippingInfo?.state || "N/A"}, 
+                ${order.shippingInfo?.country || "N/A"}, Phone: ${order.shippingInfo?.phone || "N/A"}, 
+                Email: ${order.shippingInfo?.email || "N/A"}`,
+                order.orderItems.map(item => `${item.name} (Qty: ${item.quantity})`).join("; ") || "N/A",
+                order.totalPrice || "N/A",
+                new Date(order.paidAt).toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }),
+                order.orderStatus || "N/A",
+            ];
+        });
+
+    // Add a row for the total amount
+    rows.push(["", "", "", `Total Amount: ${totalAmount}`, "", ""]);
+
+        // Combine header and rows into a CSV string
+        const csvContent =
+            [headers, ...rows]
+                .map((row) => row.map((value) => `"${value}"`).join(","))
+                .join("\n");
+
+
+        // Create a blob and trigger download
+        const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+        const link = document.createElement("a");
+        const url = URL.createObjectURL(blob);
+
+        link.setAttribute("href", url);
+        link.setAttribute("download", `Orders_${duration || "All"}.csv`);
+        link.style.display = "none";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    };
+
 
 
     return (
@@ -67,6 +133,28 @@ const Orders = () => {
             <div className="cardbox">
                 <h3>Orders List</h3>
                 <Container>
+                    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "5px" }}>
+                        <Form.Group controlId="filter" style={{ flex: 1 }}>
+                            <Form.Label style={{ paddingRight: "15px" }}>Filter by Order Date</Form.Label>
+                            <Form.Select
+                                style={{ width: "70%", display: "inline-block", marginRight: "10px" }}
+                                value={duration}
+                                onChange={(e) => setDuration(e.target.value)}
+                            >
+                                <option value="">All</option>
+                                <option value="3months">Last 3 Months</option>
+                                <option value="6months">Last 6 Months</option>
+                                <option value="1year">Last 1 Year</option>
+                            </Form.Select>
+                            <Button
+                                variant="success"
+                                onClick={exportToCSV}
+                                style={{ marginTop: "13px", height: "fit-content" }}
+                            >
+                                <FileDownloadIcon />
+                            </Button>
+                        </Form.Group>
+                    </div>
                     <Table bordered hover responsive>
                         <thead>
                             <tr>

@@ -10,15 +10,17 @@ import {
 import axios from 'axios';
 import baseUrl from '../helper';
 
-export const getOrder = () => async (dispatch) => {
+export const getOrder = (duration = "") => async (dispatch) => {
     try {
         dispatch({ type: GET_ADMIN_ORDER_REQUEST });
 
-        const { data } = await axios.get(`${baseUrl}/api/v1/admin/get-allOrders`);
+        const { data } = await axios.get(`${baseUrl}/api/v1/admin/get-allOrders`, {
+            params: { duration },
+        });
 
         dispatch({ type: GET_ADMIN_ORDER_SUCCESS, payload: data });
     } catch (error) {
-        dispatch({ type: GET_ADMIN_ORDER_FAIL, payload: error.response.data.message });
+        dispatch({ type: GET_ADMIN_ORDER_FAIL, payload: error.response?.data?.message });
     }
 }
 
