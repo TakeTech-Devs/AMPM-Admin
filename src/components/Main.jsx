@@ -6,13 +6,13 @@ import Home from "../pages/Home";
 import Aboutus from "../pages/Aboutus";
 import Product from "../pages/Product";
 import Contact from "../pages/Contact";
+import Discount from "../pages/Discount";
 import Users from "../pages/Users";
 import Resellers from "../pages/Resellers";
 import Orders from "../pages/Orders";
 import Login from "../pages/Login";
 import { Admins } from "../pages/Admins";
 import { useSelector } from "react-redux";
-import { Discount } from "@mui/icons-material";
 
 function Main() {
   const location = useLocation();
