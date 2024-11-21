@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { adminLogin, clearErrors } from '../Actions/AdminAction';
 // import logo from "../assets/company-logo.png";
 import logo from "../assets/login-page-logo.png";
+import Swal from "sweetalert2";
+
 
 function Login() {
 
@@ -27,9 +29,14 @@ function Login() {
   };
 
   useEffect(() =>{
-    if (error){
-      window.alert(error);
-      dispatch(clearErrors());
+    if (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: error,
+      }).then(() => {
+        dispatch(clearErrors());
+      });
     }
   }, [dispatch, error])
 

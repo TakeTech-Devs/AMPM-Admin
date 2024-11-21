@@ -180,21 +180,6 @@ const Discount = () => {
                                     required
                                 />
                             </Col>
-                        </Row>
-                        {/* <Row className="mb-3">
-                            <Col lg={12}>
-                                <Form.Select
-                                    name="discountType"
-                                    value={formData.discountType}
-                                    onChange={handleChange}
-                                    required
-                                >
-                                    <option value="percentage">Percentage</option>
-                                    <option value="fixed">Fixed Amount</option>
-                                </Form.Select>
-                            </Col>
-                        </Row> */}
-                        <Row className="mb-3">
                             <Col lg={12}>
                                 <Form.Label>Discount Type</Form.Label>
                                 <div className="d-flex gap-3">
@@ -234,8 +219,6 @@ const Discount = () => {
                                     step="0.01"
                                 />
                             </Col>
-                        </Row>
-                        <Row className="mb-3">
                             <Col lg={12}>
                                 <Form.Control
                                     type="number"
@@ -247,8 +230,6 @@ const Discount = () => {
                                     step="0.01"
                                 />
                             </Col>
-                        </Row>
-                        <Row className="mb-3">
                             <Col lg={12}>
                                 <Form.Control
                                     type="date"
@@ -259,14 +240,10 @@ const Discount = () => {
                                     required
                                 />
                             </Col>
-                        </Row>
-                        <Row className="d-flex justify-content-end gap-2 mt-2">
-                            <Col xs="auto">
+                            <Col xs={12} className="d-flex justify-content-end gap-2">
                                 <Button variant="danger" onClick={handleClear}>
                                     Clear
                                 </Button>
-                            </Col>
-                            <Col xs="auto">
                                 <Button variant="success" type="submit">
                                     Submit
                                 </Button>

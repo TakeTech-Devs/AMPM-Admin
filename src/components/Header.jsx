@@ -4,11 +4,22 @@ import "../styles/Dashboard.scss";
 import "../styles/Global.scss";
 import userIcon from "../assets/user.png";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
+// import { clearErrors } from "../Actions/AdminAction";
 
 function Header() {
 
   const {user, loading, isAuthenticated} = useSelector((state) => state.adminLogin);
+
+  // const navigate = useNavigate();
+  // const dispatch = useDispatch();
+
+  // useEffect(()=>{
+  //   if (!isAuthenticated){
+  //     navigate("/login");
+  //     dispatch(clearErrors());
+  //   }
+  // },[isAuthenticated,navigate,dispatch]);
 
 
   return (
