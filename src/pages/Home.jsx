@@ -161,7 +161,7 @@ function Home() {
               <Col lg={12}>
                 <Form.Control type="text" placeholder="Enter New Banner Point Three" name='headerPointThree' value={headerData.headerPointThree} onChange={handelHeaderInput} />
               </Col>
-              <Col xs={12} className=" d-flex justify-content-end gap-2">
+              <Col xs={12} className="d-flex justify-content-end gap-2">
                 <Button variant="danger">Cancel</Button>
                 <Button variant="success" type="submit">Submit</Button>
               </Col>
