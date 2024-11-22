@@ -6,10 +6,11 @@ import { aboutReducer, newAboutData } from './Reducers/AboutReducer';
 import { contactReducer, newContactData } from './Reducers/ContactReducer';
 import { consumerReducer } from './Reducers/ConsumerReducer';
 import { resellerApproveReducer, resellerReducer } from './Reducers/ResellerReducer';
-import { adminLoginReducer, adminReducer, authReducer } from './Reducers/AdminReducer';
+import { adminLoginReducer, adminReducer, authReducer, deleteAdminReducer } from './Reducers/AdminReducer';
 import { orderReducer, ordersReducer } from './Reducers/OrderReducer';
 import { newProductData, productDataReducer } from './Reducers/ProductReducer';
 import { createCouponReducer, discountApproveReducer, discountReducer } from './Reducers/discountReducer';
+import { subscribersReducer } from './Reducers/SubscribersReducer';
 
 const reducer = combineReducers({
     adminHome: homeReducer,
@@ -31,6 +32,8 @@ const reducer = combineReducers({
     discountCoupon: discountReducer,
     discountApprove: discountApproveReducer,
     createCoupon: createCouponReducer,
+    subscribersList: subscribersReducer,
+    deleteAdmin: deleteAdminReducer,
 })
 
 let initialState = {};

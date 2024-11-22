@@ -17,6 +17,8 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import TocIcon from '@mui/icons-material/Toc';
+import LoyaltyIcon from '@mui/icons-material/Loyalty';
+
 
 function Sidebar() {
   const [showContentMenu, setShowContentMenu] = useState(false);
@@ -108,6 +110,20 @@ function Sidebar() {
                     <LocalOfferIcon style={{ fontSize: 25, color: "#47ad01" }} />
                   </div>
                   Discount
+                </li>
+              </NavLink>
+
+              <NavLink
+                to="/subscribers"
+                className={({ isActive }) =>
+                  isActive ? "sidebar-link active" : "sidebar-link"
+                }
+              >
+                <li className="d-flex align-items-center">
+                  <div className="icon1">
+                    <LoyaltyIcon style={{ fontSize: 25, color: "#47ad01" }} />
+                  </div>
+                  Subscribers
                 </li>
               </NavLink>
             </ul>
