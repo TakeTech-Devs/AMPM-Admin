@@ -8,6 +8,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { approveCoupon, clearErrors, createCoupon, deleteCoupon, getDiscounts } from '../Actions/DiscountActions';
 import Swal from 'sweetalert2';
 import { DISCOUNT_APPROVE_RESET, DISCOUNT_DELETE_RESET } from '../Constants/discountConstants';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import CancelIcon from '@mui/icons-material/Cancel';
 
 const Discount = () => {
     const dispatch = useDispatch();
@@ -277,13 +279,13 @@ const Discount = () => {
                                         <td>
                                             {item.isActive ? (
                                                 // <p>Active</p>
-                                                <Button variant="success" onClick={() => showAlert(item._id)}>Active</Button>
+                                                <Button variant="outline-success" onClick={() => showAlert(item._id)}><CheckCircleIcon/></Button>
                                             ) : (
                                                 // <p>Not Active</p>
-                                                <Button variant="danger" onClick={() => showApproveAlert(item._id)}>Not Active</Button>
+                                                <Button variant="outline-danger" onClick={() => showApproveAlert(item._id)}><CancelIcon/></Button>
                                             )}
                                         </td>
-                                        <td><Button variant="danger" onClick={() => showDeleteAlert(item._id)}>Delete</Button></td>
+                                        <td><Button variant="outline-danger" onClick={() => showDeleteAlert(item._id)}><DeleteForeverIcon/></Button></td>
                                     </tr>
                                 ))
                         ) : (
