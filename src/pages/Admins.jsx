@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addAdmin, clearErrors, deleteAdmin, getAdmin, updateAdmin } from '../Actions/AdminAction';
 import Swal from 'sweetalert2';
 import Modal from 'react-bootstrap/Modal';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 export const Admins = () => {
 
@@ -138,10 +140,8 @@ export const Admins = () => {
         handleCloseEditForm();
     };
 
-
-
+    
     return (
-
         <>
             <div className="cardbox">
                 <h3>Admin List</h3>
@@ -167,9 +167,9 @@ export const Admins = () => {
                     <Table bordered hover responsive>
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Delete</th>
+                                <th style={{width:"30%"}}>Admin Name</th>
+                                <th style={{width:"40%"}}>Admin Email</th>
+                                <th style={{width:"20%"}}>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -180,8 +180,8 @@ export const Admins = () => {
                                         <td>{user.name || "N/A"}</td>
                                         <td>{user.email || "N/A"}</td>
                                         <td>
-                                            <Button variant='success' onClick={() => handleShowEditForm(user)}>Edit</Button>
-                                            <Button variant="danger" onClick={() => showDeleteAlert(user._id)}>Delete</Button>
+                                            <Button variant='outline-success' onClick={() => handleShowEditForm(user)}><EditIcon style={{ fontSize: "20px" }}/></Button>{" "}
+                                            <Button variant="outline-danger" onClick={() => showDeleteAlert(user._id)}><DeleteForeverIcon style={{ fontSize: "20px" }}/></Button>
                                         </td>
                                     </tr>
                                 ))

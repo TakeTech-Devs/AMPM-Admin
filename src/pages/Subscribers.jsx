@@ -30,9 +30,9 @@ const Subscribers = () => {
                         </thead>
                         <tbody>
                             {subscribers && subscribers.length > 0 ? (
-                                subscribers
-                                .reverse()
-                                .map((item) => (
+                                [...subscribers].reverse().map((item)=> (
+                                // .reverse()
+                                // .map((item) => (
                                     <tr key={item._id}>
                                         <td>{item.email}</td>
                                         <td>{new Date(item.createdAt).toLocaleString("en-IN", { timeZone: "Asia/Kolkata" })}</td>

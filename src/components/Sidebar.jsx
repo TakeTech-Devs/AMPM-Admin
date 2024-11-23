@@ -17,7 +17,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import TocIcon from '@mui/icons-material/Toc';
-import LoyaltyIcon from '@mui/icons-material/Loyalty';
+import MarkEmailReadIcon from '@mui/icons-material/MarkEmailRead';
 
 
 function Sidebar() {
@@ -121,7 +121,7 @@ function Sidebar() {
               >
                 <li className="d-flex align-items-center">
                   <div className="icon1">
-                    <LoyaltyIcon style={{ fontSize: 25, color: "#47ad01" }} />
+                    <MarkEmailReadIcon style={{ fontSize: 25, color: "#47ad01" }} />
                   </div>
                   Subscribers
                 </li>
