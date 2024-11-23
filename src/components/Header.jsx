@@ -11,16 +11,6 @@ function Header() {
 
   const {user, loading, isAuthenticated} = useSelector((state) => state.adminLogin);
 
-  // const navigate = useNavigate();
-  // const dispatch = useDispatch();
-
-  // useEffect(()=>{
-  //   if (!isAuthenticated){
-  //     navigate("/login");
-  //     dispatch(clearErrors());
-  //   }
-  // },[isAuthenticated,navigate,dispatch]);
-
 
   return (
     <>

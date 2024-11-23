@@ -13,6 +13,8 @@ import Orders from "../pages/Orders";
 import Login from "../pages/Login";
 import { Admins } from "../pages/Admins";
 import { useSelector } from "react-redux";
+import Subscribers from "../pages/Subscribers";
+import Testimonial from "../pages/Testimonial";
 
 function Main() {
   const location = useLocation();
@@ -46,6 +48,8 @@ function Main() {
           <Route path="/resellers" element={<Resellers />} />
           <Route path="/orders" element={<Orders />} />
           <Route path="/admins" element={<Admins />} />
+          <Route path="/subscribers" element={<Subscribers />} />
+          <Route path="/testimonial" element={<Testimonial />} />
         </Routes>
       </div>
     </div>

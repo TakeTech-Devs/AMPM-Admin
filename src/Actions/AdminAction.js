@@ -14,6 +14,12 @@ import {
     ADD_NEW_ADMIN_REQUEST,
     ADD_NEW_ADMIN_SUCCESS,
     ADD_NEW_ADMIN_FAIL,
+    ADMIN_DELETE_REQUEST,
+    ADMIN_DELETE_SUCCESS,
+    ADMIN_DELETE_FAIL,
+    ADMIN_UPDATE_REQUEST,
+    ADMIN_UPDATE_SUCCESS,
+    ADMIN_UPDATE_FAIL,
 } from '../Constants/AdminConstants';
 import axios from 'axios';
 import baseUrl from '../helper';
@@ -85,6 +91,47 @@ export const addAdmin = (Data) => async (dispatch) => {
     }
 };
 
+export const deleteAdmin = (id) => async (dispatch) => {
+    try {
+        dispatch({ type: ADMIN_DELETE_REQUEST });
+
+        const { data } = await axios.delete(`${baseUrl}/api/v1/admin/admin/${id}`, { withCredentials: true });
+
+        dispatch({
+            type: ADMIN_DELETE_SUCCESS,
+            payload: data.success,
+        });
+
+    } catch (error) {
+        dispatch({
+            type: ADMIN_DELETE_FAIL,
+            payload: error.response?.data?.message,
+        })
+    }
+}
+
+
+// Update Admin 
+
+export const updateAdmin = (id, adminData) => async (dispatch) =>{
+    try {
+        dispatch({ type: ADMIN_UPDATE_REQUEST })
+
+
+        const config = { headers: { "Content-Type": "application/json" }, withCredentials: true };
+
+        const { data } = await axios.put(`${baseUrl}/api/v1/admin/update/${id}`, adminData, config)
+
+        dispatch({ type: ADMIN_UPDATE_SUCCESS, payload: data.success });
+
+
+    } catch (error) {
+        dispatch({
+      type: ADMIN_UPDATE_FAIL,
+      payload: error.response.data.message,
+    });
+    }
+}
 
 export const clearErrors = () => async (dispatch) => {
     dispatch({ type: CLEAR_ERRORS });
