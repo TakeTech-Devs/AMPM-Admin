@@ -11,6 +11,7 @@ import { orderReducer, ordersReducer } from './Reducers/OrderReducer';
 import { newProductData, productDataReducer } from './Reducers/ProductReducer';
 import { createCouponReducer, discountApproveReducer, discountReducer } from './Reducers/discountReducer';
 import { subscribersReducer } from './Reducers/SubscribersReducer';
+import { createTestimonialReducer, testimonialReducer } from './Reducers/TestimonialReducer';
 
 const reducer = combineReducers({
     adminHome: homeReducer,
@@ -34,6 +35,8 @@ const reducer = combineReducers({
     createCoupon: createCouponReducer,
     subscribersList: subscribersReducer,
     deleteAdmin: deleteAdminReducer,
+    createTestimonial: createTestimonialReducer,
+    testimonials: testimonialReducer
 })
 
 let initialState = {};
