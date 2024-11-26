@@ -267,9 +267,7 @@ const Discount = () => {
                     </thead>
                     <tbody>
                         {discountCoupon && discountCoupon.length > 0 ? (
-                            discountCoupon
-                                .reverse()
-                                .map((item) => (
+                            [...discountCoupon].reverse().map((item) => (                                
                                     <tr key={item._id}>
                                         <td>{item.code || "N/A"}</td>
                                         <td>{item.discountType || "N/A"}</td>

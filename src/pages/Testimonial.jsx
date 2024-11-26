@@ -133,9 +133,9 @@ const Testimonial = () => {
           </thead>
           <tbody>
             {testimonialList && testimonialList.length > 0 ? (
-              testimonialList
-                .reverse()
-                .map((item) => (
+              [...testimonialList].reverse().map((item) => (
+                // .reverse()
+                // .map((item) => (
                   <tr key={item._id}>
                     <td>{item.name || "N/A"}</td>
                     <td>{item.role || "N/A"}</td>
