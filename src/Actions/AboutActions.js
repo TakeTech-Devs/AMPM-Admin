@@ -24,7 +24,7 @@ export const getAbout = () => async (dispatch) => {
 
         dispatch({ type: GET_ADMIN_ABOUT_SUCCESS, payload: data });
     } catch (error) {
-        dispatch({ type: GET_ADMIN_ABOUT_FAIL, payload: error.response.data.message });
+        dispatch({ type: GET_ADMIN_ABOUT_FAIL, payload: error.response?.data?.message });
     }
 }
 
@@ -46,7 +46,7 @@ export const createAboutHeader = (HeaderData) => async(dispatch) =>{
     } catch (error) {
         dispatch({
             type: ADD_ABOUTHEADER_ADMIN_FAIL,
-            payload: error.response?.data.message,
+            payload: error.response?.data?.message,
         });
     }
 }
@@ -69,7 +69,7 @@ export const createAboutMission = (Data) => async(dispatch) =>{
     } catch (error) {
         dispatch({
             type: ADD_ABOUTMISSION_ADMIN_FAIL,
-            payload: error.response?.data.message,
+            payload: error.response?.data?.message,
         });
     }
 }
@@ -92,7 +92,7 @@ export const createAboutWeDo = (Data) => async(dispatch) =>{
     } catch (error) {
         dispatch({
             type: ADD_ABOUTWEDO_ADMIN_FAIL,
-            payload: error.response?.data.message,
+            payload: error.response?.data?.message,
         });
     }
 }

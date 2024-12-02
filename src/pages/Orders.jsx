@@ -133,7 +133,7 @@ const Orders = () => {
 
     return (
         <>
-        {updateLoading && <Loader />}
+            {updateLoading && <Loader />}
             <div className="cardbox">
                 <h3>Orders List</h3>
                 <Container>

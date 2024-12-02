@@ -10,7 +10,7 @@ const Contact = () => {
 
     const dispatch = useDispatch();
 
-    const { contactInfo, loading, error } = useSelector(state => state.adminContact); getContact
+    const { contactInfo, loading, error } = useSelector(state => state.adminContact);
 
     useEffect(() => {
         dispatch(getContact());
@@ -98,11 +98,13 @@ const Contact = () => {
                                 <td>{contactInfo.headerTitle}</td>
                                 <td>{contactInfo.headerDescription}</td>
                             </tr> */}
-                            {contactInfo && contactInfo.headerTitle ? (
-                                <tr>
-                                    <td>{contactInfo.headerTitle}</td>
-                                    <td>{contactInfo.headerDescription}</td>
-                                </tr>
+                            {contactInfo && contactInfo.length > 0 ? (
+                                contactInfo.map((info, index) => (
+                                    <tr key={index}>
+                                        <td>{info.headerTitle}</td>
+                                        <td>{info.headerDescription}</td>
+                                    </tr>
+                                ))
                             ) : (
                                 <tr>
                                     <td colSpan="2" className="text-center">No data found</td>
@@ -121,10 +123,10 @@ const Contact = () => {
                                 <Form.Control type="text" placeholder="Enter New Landline Number" name='Landline' value={headerData.Landline} onChange={handelHeaderInput} />
                             </Col>
                             <Col lg={12}>
-                                <Form.Control type="text" placeholder="Enter New Mobile Number"  name='Mobile' value={headerData.Mobile} onChange={handelHeaderInput} />
+                                <Form.Control type="text" placeholder="Enter New Mobile Number" name='Mobile' value={headerData.Mobile} onChange={handelHeaderInput} />
                             </Col>
                             <Col lg={12}>
-                                <Form.Control type="text" placeholder="Enter New Email" name='Email' value={headerData.Email} onChange={handelHeaderInput}/>
+                                <Form.Control type="text" placeholder="Enter New Email" name='Email' value={headerData.Email} onChange={handelHeaderInput} />
                             </Col>
                             <Col xs={12} className=" d-flex justify-content-end gap-2">
                                 <Button variant="danger">Cancel</Button>
@@ -146,15 +148,17 @@ const Contact = () => {
                                 <td>{contactInfo.Mobile}</td>
                                 <td>{contactInfo.Email}</td>
                             </tr> */}
-                            {contactInfo && contactInfo.Landline ? (
-                                <tr>
-                                    <td>{contactInfo.Landline}</td>
-                                    <td>{contactInfo.Mobile}</td>
-                                    <td>{contactInfo.Email}</td>
-                                </tr>
+                             {contactInfo && contactInfo.length > 0 ? (
+                                contactInfo.map((info, index) => (
+                                    <tr key={index}>
+                                        <td>{info.Landline}</td>
+                                        <td>{info.Mobile}</td>
+                                        <td>{info.Email}</td>
+                                    </tr>
+                                ))
                             ) : (
                                 <tr>
-                                    <td colSpan="3" className="text-center">No data found</td>
+                                    <td colSpan="2" className="text-center">No data found</td>
                                 </tr>
                             )}
                         </tbody>

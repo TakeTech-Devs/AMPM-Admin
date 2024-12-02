@@ -44,7 +44,7 @@ export const updateOrder = (id, order) => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: UPDATE_ADMIN_ORDER_FAIL,
-            payload: error.response.data.message,
+            payload: error.response?.data?.message,
         });
     }
 };

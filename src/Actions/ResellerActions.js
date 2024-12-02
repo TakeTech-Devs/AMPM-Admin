@@ -39,7 +39,7 @@ export const approveReseller = (id) => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: RESELLER_APPROVE_FAIL,
-            payload: error.response.data.message,
+            payload: error.response?.data?.message,
         })
     }
 }
