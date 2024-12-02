@@ -6,6 +6,9 @@ import {
     ADD_CONTACT_ADMIN_REQUEST,
     ADD_CONTACT_ADMIN_SUCCESS,
     ADD_CONTACT_ADMIN_FAIL,
+    GET_CONTACT_QUERIES_REQUEST,
+    GET_CONTACT_QUERIES_SUCCESS,
+    GET_CONTACT_QUERIES_FAIL,
 } from '../Constants/ContactConstants';
 import axios from 'axios';
 import baseUrl from '../helper';
@@ -18,7 +21,7 @@ export const getContact = () => async (dispatch) => {
 
         dispatch({ type: GET_ADMIN_CONTACT_SUCCESS, payload: data });
     } catch (error) {
-        dispatch({ type: GET_ADMIN_CONTACT_FAIL, payload: error.response.data.message });   
+        dispatch({ type: GET_ADMIN_CONTACT_FAIL, payload: error.response?.data?.message });   
     }
 }
 
@@ -40,8 +43,21 @@ export const createContact = (HeaderData) => async(dispatch) =>{
     } catch (error) {
         dispatch({
             type: ADD_CONTACT_ADMIN_FAIL,
-            payload: error.response?.data.message,
+            payload: error.response?.data?.message,
         });
+    }
+}
+
+export const getContactQueries = () => async (dispatch) => {
+    try {
+        dispatch({ type: GET_CONTACT_QUERIES_REQUEST });
+
+        const { data } = await axios.get(`${baseUrl}/api/v1/admin/get-contactUs`);
+
+        dispatch({ type: GET_CONTACT_QUERIES_SUCCESS, payload: data });
+    } catch (error) {
+        dispatch({ type: GET_CONTACT_QUERIES_FAIL, payload: error.response?.data?.message });   
+        console.log("PRoblem", error)
     }
 }
 

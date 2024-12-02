@@ -32,7 +32,7 @@ export const getAdmin = () => async (dispatch) => {
 
         dispatch({ type: GET_ADMIN_ADMIN_SUCCESS, payload: data });
     } catch (error) {
-        dispatch({ type: GET_ADMIN_ADMIN_FAIL, payload: error.response.data.message });
+        dispatch({ type: GET_ADMIN_ADMIN_FAIL, payload: error.response?.data?.message });
     }
 }
 
@@ -49,7 +49,7 @@ export const adminLogin = (email, password) => async (dispatch) => {
             payload: data.user
         })
     } catch (error) {
-        dispatch({ type: ADMIN_LOGIN_FAIL, payload: error.response.data.message });
+        dispatch({ type: ADMIN_LOGIN_FAIL, payload: error.response?.data?.message });
     }
 }
 
@@ -61,7 +61,7 @@ export const loadAdmin = () => async (dispatch) => {
 
         dispatch({ type: LOAD_ADMIN_SUCCESS, payload: data.user });
     } catch (error) {
-        dispatch({ type: LOAD_ADMIN_FAIL, payload: error.response.data.message });
+        dispatch({ type: LOAD_ADMIN_FAIL, payload: error.response?.data?.message });
     }
 }
 
@@ -71,7 +71,7 @@ export const logout = () => async (dispatch) => {
         dispatch({ type: LOGOUT_SUCCESS });
         console.log("hi")
     } catch (error) {
-        dispatch({ type: LOGOUT_FAIL, payload: error.response.data.message });
+        dispatch({ type: LOGOUT_FAIL, payload: error.response?.data?.message });
     }
 };
 
@@ -87,7 +87,7 @@ export const addAdmin = (Data) => async (dispatch) => {
 
         dispatch({ type: ADD_NEW_ADMIN_SUCCESS, payload: response.data });
     } catch (error) {
-        dispatch({ type: ADD_NEW_ADMIN_FAIL, error: error.response.data.msg || error.message });
+        dispatch({ type: ADD_NEW_ADMIN_FAIL, error: error.response?.data?.msg || error.message });
     }
 };
 
@@ -128,7 +128,7 @@ export const updateAdmin = (id, adminData) => async (dispatch) =>{
     } catch (error) {
         dispatch({
       type: ADMIN_UPDATE_FAIL,
-      payload: error.response.data.message,
+      payload: error.response?.data?.message,
     });
     }
 }
