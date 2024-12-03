@@ -2,13 +2,16 @@ import React from 'react';
 import { useEffect } from 'react';
 import { Form, Container, Row, Col, Button, Table, Spinner } from "react-bootstrap";
 import { useSelector, useDispatch } from 'react-redux';
-import { clearErrors, getContactQueries } from '../Actions/ContactAction';
+import { clearErrors, getContactQueries, queriseResolve } from '../Actions/ContactAction';
+import Swal from 'sweetalert2';
+import { QUERIES_RESOLVED_RESET } from '../Constants/ContactConstants';
 
 const Queries = () => {
 
     const dispatch = useDispatch();
 
     const { contactUsData, loading, error } = useSelector(state => state.adminContact);
+    const { error: approveError, isApproved, loading: approveLoading } = useSelector((state) => state.querise);
 
     useEffect(() => {
         dispatch(getContactQueries());
@@ -17,7 +20,41 @@ const Queries = () => {
             alert(error);
             dispatch(clearErrors());
         }
-    }, [dispatch, error]);
+        if (isApproved) {
+            window.alert("Querie Resolved Successfully");
+            // navigate("/admin/products");
+            dispatch({ type: QUERIES_RESOLVED_RESET });
+
+        }
+    }, [dispatch, error, isApproved]);
+
+    const queriseResolveHandler = (id) => {
+        dispatch(queriseResolve(id));
+        // window.location.reload();
+    }
+
+    const showAlert = (id) => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'Do you want to resolve this queries?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, resolve it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                queriseResolveHandler(id)
+                Swal.fire(
+                    'Resolved!',
+                    'The queries has been resolved successfully.',
+                    'success'
+                ).then(() => {
+                    window.location.reload(); // Reload the page after clicking OK
+                });
+            }
+        });
+    }
 
     return (
         <>
@@ -46,8 +83,14 @@ const Queries = () => {
                                         <td>{user.phone || "N/A"}</td>
                                         <td>{user.company || "N/A"}</td>
                                         <td>{user.message || "N/A"}</td>
-                                        <td></td>
-                                        <td></td>
+                                        <td>{user.status ? "Reslove" : "Not Reslove"}</td>
+                                        <td>
+                                            {user.status ? (
+                                                <Button variant="secondary" disabled >Resolved</Button>
+                                            ) : (
+                                                <Button variant="success" onClick={() => showAlert(user._id)}>Resolve</Button>
+                                            )}
+                                        </td>
                                     </tr>
                                 ))
                             ) : (

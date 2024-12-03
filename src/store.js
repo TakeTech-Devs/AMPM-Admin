@@ -3,7 +3,7 @@ import {thunk} from 'redux-thunk';
 import { composeWithDevTools } from '@redux-devtools/extension';
 import { homeReducer, newHomeData } from './Reducers/HomeReducer';
 import { aboutReducer, newAboutData } from './Reducers/AboutReducer';
-import { contactReducer, newContactData } from './Reducers/ContactReducer';
+import { contactReducer, newContactData, queriseResolveReducer } from './Reducers/ContactReducer';
 import { consumerReducer } from './Reducers/ConsumerReducer';
 import { resellerApproveReducer, resellerReducer } from './Reducers/ResellerReducer';
 import { adminLoginReducer, adminReducer, authReducer, deleteAdminReducer } from './Reducers/AdminReducer';
@@ -36,7 +36,8 @@ const reducer = combineReducers({
     subscribersList: subscribersReducer,
     deleteAdmin: deleteAdminReducer,
     createTestimonial: createTestimonialReducer,
-    testimonials: testimonialReducer
+    testimonials: testimonialReducer,
+    querise: queriseResolveReducer,
 })
 
 let initialState = {};

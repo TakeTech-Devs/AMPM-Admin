@@ -10,6 +10,10 @@ import {
     GET_CONTACT_QUERIES_REQUEST,
     GET_CONTACT_QUERIES_SUCCESS,
     GET_CONTACT_QUERIES_FAIL,
+    QUERIES_RESOLVED_REQUEST,
+    QUERIES_RESOLVED_SUCCESS,
+    QUERIES_RESOLVED_FAIL,
+    QUERIES_RESOLVED_RESET,
 } from '../Constants/ContactConstants';
 
 export const contactReducer = (state = { contactInfo: [], contactUsData:[] }, action) => {
@@ -75,6 +79,40 @@ export const newContactData = (state = { contact: {} }, action) => {
                 error: null,
             };
 
+        default:
+            return state;
+    }
+}
+
+export const queriseResolveReducer = (state = {}, action) => {
+    switch (action.type) {
+        case QUERIES_RESOLVED_REQUEST:
+            return {
+                ...state,
+                loading: true,
+            }
+        case QUERIES_RESOLVED_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                isApprove: action.payload.success,
+            }
+        case QUERIES_RESOLVED_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload,
+            }
+        case QUERIES_RESOLVED_RESET:
+            return {
+                ...state,
+                isApproved: false,
+            }
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null,
+            };
         default:
             return state;
     }

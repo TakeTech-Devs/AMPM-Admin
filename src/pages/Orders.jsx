@@ -30,8 +30,12 @@ const Orders = () => {
             alert(error);
             dispatch(clearErrors());
         }
+        if(updateError){
+            window.alert(updateError);
+            dispatch(clearErrors());
+        }
         dispatch(getOrder(duration));
-    }, [dispatch, error, duration]);
+    }, [dispatch, error, duration, updateError]);
 
     const [showEditForm, setShowEditForm] = useState(false);
     const [selectedOrder, setSelectedOrder] = useState(null);
@@ -42,7 +46,7 @@ const Orders = () => {
             alert("Order status updated successfully");
             dispatch(getOrder());  // Refresh orders list after update
             dispatch({ type: UPDATE_ADMIN_ORDER_RESET });
-            handleCloseEditForm(); // Close modal
+            // handleCloseEditForm(); // Close modal
         }
     }, [dispatch, isUpdated]);
 
@@ -65,6 +69,7 @@ const Orders = () => {
         e.preventDefault();
         if (selectedOrder && orderStatus) {
             dispatch(updateOrder(selectedOrder._id, { status: orderStatus }));
+            handleCloseEditForm();
         }
     };
 

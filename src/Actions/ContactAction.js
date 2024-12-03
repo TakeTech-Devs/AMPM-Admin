@@ -9,6 +9,9 @@ import {
     GET_CONTACT_QUERIES_REQUEST,
     GET_CONTACT_QUERIES_SUCCESS,
     GET_CONTACT_QUERIES_FAIL,
+    QUERIES_RESOLVED_REQUEST,
+    QUERIES_RESOLVED_SUCCESS,
+    QUERIES_RESOLVED_FAIL,
 } from '../Constants/ContactConstants';
 import axios from 'axios';
 import baseUrl from '../helper';
@@ -58,6 +61,25 @@ export const getContactQueries = () => async (dispatch) => {
     } catch (error) {
         dispatch({ type: GET_CONTACT_QUERIES_FAIL, payload: error.response?.data?.message });   
         console.log("PRoblem", error)
+    }
+}
+
+export const queriseResolve = (id) => async (dispatch) => {
+    try {
+        dispatch({ type: QUERIES_RESOLVED_REQUEST });
+
+        const { data } = await axios.put(`${baseUrl}/api/v1/admin/queries/resolve/${id}`, { withCredentials: true });
+
+        dispatch({
+            type: QUERIES_RESOLVED_SUCCESS,
+            payload: data.success,
+        });
+
+    } catch (error) {
+        dispatch({
+            type: QUERIES_RESOLVED_FAIL,
+            payload: error.response?.data?.message,
+        })
     }
 }
 
