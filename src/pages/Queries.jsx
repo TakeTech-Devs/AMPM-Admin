@@ -59,7 +59,7 @@ const Queries = () => {
     return (
         <>
             <div className="cardbox">
-                <h3>Reseller List</h3>
+                <h3>Query List</h3>
                 <Container>
                     <Table bordered hover responsive>
                         <thead>
@@ -83,7 +83,7 @@ const Queries = () => {
                                         <td>{user.phone || "N/A"}</td>
                                         <td>{user.company || "N/A"}</td>
                                         <td>{user.message || "N/A"}</td>
-                                        <td>{user.status ? "Reslove" : "Not Reslove"}</td>
+                                        <td>{user.status ? "Resloved" : "Not Resloved"}</td>
                                         <td>
                                             {user.status ? (
                                                 <Button variant="secondary" disabled >Resolved</Button>
