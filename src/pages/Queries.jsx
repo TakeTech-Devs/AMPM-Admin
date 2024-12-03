@@ -59,7 +59,7 @@ const Queries = () => {
     return (
         <>
             <div className="cardbox">
-                <h3>Query List</h3>
+                <h3>Queries List</h3>
                 <Container>
                     <Table bordered hover responsive>
                         <thead>
