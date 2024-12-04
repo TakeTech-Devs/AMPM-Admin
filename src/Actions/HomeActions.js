@@ -28,7 +28,7 @@ export const getHome = () => async (dispatch) => {
         dispatch({ type: GET_ADMIN_HOME_SUCCESS, payload: data });
 
     } catch (error) {
-        dispatch({ type: GET_ADMIN_HOME_FAIL, payload: error.response.data.message });
+        dispatch({ type: GET_ADMIN_HOME_FAIL, payload: error.response?.data?.message });
     }
 }
 
@@ -50,7 +50,7 @@ export const createHomeHeader = (HeaderData) => async(dispatch) =>{
     } catch (error) {
         dispatch({
             type: ADD_HOMEHEADER_ADMIN_FAIL,
-            payload: error.response?.data.message,
+            payload: error.response?.data?.message,
         });
     }
 }
@@ -73,7 +73,7 @@ export const createHomeHeaderCard = (HeaderData) => async(dispatch) =>{
     } catch (error) {
         dispatch({
             type: ADD_HOMEHEADERCARD_ADMIN_FAIL,
-            payload: error.response?.data.message,
+            payload: error.response?.data?.message,
         });
     }
 }
@@ -96,7 +96,7 @@ export const createHomeBatterie = (Data) => async(dispatch) =>{
     } catch (error) {
         dispatch({
             type: ADD_HOMEBATTARIE_ADMIN_FAIL,
-            payload: error.response?.data.message,
+            payload: error.response?.data?.message,
         });
     }
 }
@@ -119,7 +119,7 @@ export const createHomeContact = (Data) => async(dispatch) =>{
     } catch (error) {
         dispatch({
             type: ADD_HOMECONTACT_ADMIN_FAIL,
-            payload: error.response?.data.message,
+            payload: error.response?.data?.message,
         });
     }
 }

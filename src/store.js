@@ -3,13 +3,15 @@ import {thunk} from 'redux-thunk';
 import { composeWithDevTools } from '@redux-devtools/extension';
 import { homeReducer, newHomeData } from './Reducers/HomeReducer';
 import { aboutReducer, newAboutData } from './Reducers/AboutReducer';
-import { contactReducer, newContactData } from './Reducers/ContactReducer';
+import { contactReducer, newContactData, queriseResolveReducer } from './Reducers/ContactReducer';
 import { consumerReducer } from './Reducers/ConsumerReducer';
 import { resellerApproveReducer, resellerReducer } from './Reducers/ResellerReducer';
-import { adminLoginReducer, adminReducer, authReducer } from './Reducers/AdminReducer';
+import { adminLoginReducer, adminReducer, authReducer, deleteAdminReducer } from './Reducers/AdminReducer';
 import { orderReducer, ordersReducer } from './Reducers/OrderReducer';
 import { newProductData, productDataReducer } from './Reducers/ProductReducer';
 import { createCouponReducer, discountApproveReducer, discountReducer } from './Reducers/discountReducer';
+import { subscribersReducer } from './Reducers/SubscribersReducer';
+import { createTestimonialReducer, testimonialReducer } from './Reducers/TestimonialReducer';
 
 const reducer = combineReducers({
     adminHome: homeReducer,
@@ -31,6 +33,11 @@ const reducer = combineReducers({
     discountCoupon: discountReducer,
     discountApprove: discountApproveReducer,
     createCoupon: createCouponReducer,
+    subscribersList: subscribersReducer,
+    deleteAdmin: deleteAdminReducer,
+    createTestimonial: createTestimonialReducer,
+    testimonials: testimonialReducer,
+    querise: queriseResolveReducer,
 })
 
 let initialState = {};

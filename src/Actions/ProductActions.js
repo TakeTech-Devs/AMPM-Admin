@@ -31,7 +31,7 @@ export const getProdcutData = () => async (dispatch) => {
 
         dispatch({ type: GET_ADMIN_PRODUCT_SUCCESS, payload: data });
     } catch (error) {
-        dispatch({ type: GET_ADMIN_PRODUCT_FAIL, payload: error.response.data.message });
+        dispatch({ type: GET_ADMIN_PRODUCT_FAIL, payload: error.response?.data?.message });
     }
 }
 
@@ -53,7 +53,7 @@ export const createProductHeader = (HeaderData) => async(dispatch) =>{
     } catch (error) {
         dispatch({
             type: ADD_PRODUCTHEADER_ADMIN_FAIL,
-            payload: error.response?.data.message,
+            payload: error.response?.data?.message,
         });
     }
 }
@@ -77,7 +77,7 @@ export const createProductBattery = (Data) => async(dispatch) =>{
     } catch (error) {
         dispatch({
             type: ADD_BATTERY_ADMIN_FAIL,
-            payload: error.response?.data.message,
+            payload: error.response?.data?.message,
         });
     }
 }
@@ -101,7 +101,7 @@ export const createProductBatteryCard = (Data) => async(dispatch) =>{
     } catch (error) {
         dispatch({
             type: ADD_BATTERYCARD_ADMIN_FAIL,
-            payload: error.response?.data.message,
+            payload: error.response?.data?.message,
         });
     }
 }
@@ -124,7 +124,7 @@ export const createProductFeatureBattery = (Data) => async(dispatch) =>{
     } catch (error) {
         dispatch({
             type: ADD_FEATUREBATTERY_ADMIN_FAIL,
-            payload: error.response?.data.message,
+            payload: error.response?.data?.message,
         });
     }
 }
@@ -153,7 +153,7 @@ export const deleteFeatureProductPoint = (id, pointToRemove) => async (dispatch)
     } catch (error) {
         dispatch({
             type: DELETE_FEATUREBATTERYPOINT_FAIL,
-            payload: error.response?.data.message,
+            payload: error.response?.data?.message,
         });
     }
 };

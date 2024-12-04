@@ -17,6 +17,10 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import TocIcon from '@mui/icons-material/Toc';
+import MarkEmailReadIcon from '@mui/icons-material/MarkEmailRead';
+import ReviewsIcon from '@mui/icons-material/Reviews';
+import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
+
 
 function Sidebar() {
   const [showContentMenu, setShowContentMenu] = useState(false);
@@ -110,9 +114,53 @@ function Sidebar() {
                   Discount
                 </li>
               </NavLink>
+              
+
+              <NavLink
+                to="/subscribers"
+                className={({ isActive }) =>
+                  isActive ? "sidebar-link active" : "sidebar-link"
+                }
+              >
+                <li className="d-flex align-items-center">
+                  <div className="icon1">
+                    <MarkEmailReadIcon style={{ fontSize: 25, color: "#47ad01" }} />
+                  </div>
+                  Subscribers
+                </li>
+              </NavLink>
+
+              <NavLink
+                to="/testimonial"
+                className={({ isActive }) =>
+                  isActive ? "sidebar-link active" : "sidebar-link"
+                }
+              >
+                <li className="d-flex align-items-center">
+                  <div className="icon1">
+                    <ReviewsIcon style={{ fontSize: 25, color: "#47ad01" }} />
+                  </div>
+                  Testimonial
+                </li>
+              </NavLink>
             </ul>
           )}
           {/* Other Links */}
+          <NavLink
+            to="/queries"
+            className={({ isActive }) =>
+              isActive ? "sidebar-link active" : "sidebar-link"
+            }
+          >
+            <li className="d-flex align-items-center">
+              <div className="icon1">
+                <QuestionAnswerIcon
+                  style={{ fontSize: 25, color: "#47ad01" }}
+                />
+              </div>
+              Queries
+            </li>
+          </NavLink>
           <NavLink
             to="/consumers"
             className={({ isActive }) =>

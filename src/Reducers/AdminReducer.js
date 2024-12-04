@@ -15,6 +15,14 @@ import {
     ADD_NEW_ADMIN_SUCCESS,
     ADD_NEW_ADMIN_FAIL,
     ADD_NEW_ADMIN_RESET,
+    ADMIN_DELETE_REQUEST,
+    ADMIN_DELETE_SUCCESS,
+    ADMIN_DELETE_FAIL,
+    ADMIN_DELETE_RESET,
+    ADMIN_UPDATE_REQUEST,
+    ADMIN_UPDATE_SUCCESS,
+    ADMIN_UPDATE_FAIL,
+    ADMIN_UPDATE_RESET
 } from '../Constants/AdminConstants';
 
 
@@ -128,6 +136,44 @@ export const authReducer = (state = {}, action) => {
             return {
                 ...state,
                 user: null,
+            };
+        default:
+            return state;
+    }
+}
+
+export const deleteAdminReducer = (state = {}, action) => {
+    switch (action.type) {
+        case ADMIN_DELETE_REQUEST:
+        case ADMIN_UPDATE_REQUEST:
+            return {
+                ...state,
+                loading: true,
+            }
+        case ADMIN_DELETE_SUCCESS:
+        case ADMIN_UPDATE_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                isApprove: action.payload.success,
+            }
+        case ADMIN_DELETE_FAIL:
+        case ADMIN_UPDATE_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload,
+            }
+        case ADMIN_DELETE_RESET:
+        case ADMIN_UPDATE_RESET:
+            return {
+                ...state,
+                isApproved: false,
+            }
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null,
             };
         default:
             return state;

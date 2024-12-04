@@ -1,29 +1,55 @@
 import {
-    GET_ADMIN_ORDER_REQUEST,
-    GET_ADMIN_ORDER_SUCCESS,
-    GET_ADMIN_ORDER_FAIL,
+    CREATE_TESTIMONIAL_REQUEST,
+    CREATE_TESTIMONIAL_SUCCESS,
+    CREATE_TESTIMONIAL_FAIL,
     CLEAR_ERRORS,
-    UPDATE_ADMIN_ORDER_REQUEST,
-    UPDATE_ADMIN_ORDER_SUCCESS,
-    UPDATE_ADMIN_ORDER_FAIL,
-    UPDATE_ADMIN_ORDER_RESET,
-} from '../Constants/OrderConstants';
+    GET_ADMIN_TESTIMONIAL_REQUEST,
+    GET_ADMIN_TESTIMONIAL_SUCCESS,
+    GET_ADMIN_TESTIMONIAL_FAIL
+} from '../Constants/TestimonialConstants';
 
-
-export const ordersReducer = (state = { orders: [] }, action) => {
+export const createTestimonialReducer = (state = {}, action) => {
     switch (action.type) {
-        case GET_ADMIN_ORDER_REQUEST:
+        case CREATE_TESTIMONIAL_REQUEST:
             return {
                 ...state,
                 loading: true,
             };
-        case GET_ADMIN_ORDER_SUCCESS:
+        case CREATE_TESTIMONIAL_SUCCESS:
             return {
                 ...state,
                 loading: false,
-                orders: action.payload.orders,
             }
-        case GET_ADMIN_ORDER_FAIL:
+        case CREATE_TESTIMONIAL_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload
+            }
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                user: null,
+            };
+        default:
+            return state;
+    }
+}
+
+export const testimonialReducer = (state = { testimonialList: [] }, action) => {
+    switch (action.type) {
+        case GET_ADMIN_TESTIMONIAL_REQUEST:
+            return {
+                ...state,
+                loading: true,
+            };
+        case GET_ADMIN_TESTIMONIAL_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                testimonialList: action.payload.testimonialList,
+            };
+        case GET_ADMIN_TESTIMONIAL_FAIL:
             return {
                 ...state,
                 loading: false,
@@ -38,41 +64,3 @@ export const ordersReducer = (state = { orders: [] }, action) => {
             return state;
     }
 }
-
-export const orderReducer = (state = {}, action) => {
-    switch (action.type) {
-        case UPDATE_ADMIN_ORDER_REQUEST:
-            return {
-                ...state,
-                loading: true,
-            };
-
-        case UPDATE_ADMIN_ORDER_SUCCESS:
-            return {
-                ...state,
-                loading: false,
-                isUpdated: action.payload,
-            };
-
-        case UPDATE_ADMIN_ORDER_FAIL:
-            return {
-                ...state,
-                loading: false,
-                error: action.payload,
-            };
-        case UPDATE_ADMIN_ORDER_RESET:
-            return {
-                ...state,
-                isUpdated: false,
-            };
-        case CLEAR_ERRORS:
-            return {
-                ...state,
-                error: null,
-            };
-
-        default:
-            return state;
-    }
-};
-

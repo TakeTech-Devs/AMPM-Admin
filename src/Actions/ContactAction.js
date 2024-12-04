@@ -6,6 +6,12 @@ import {
     ADD_CONTACT_ADMIN_REQUEST,
     ADD_CONTACT_ADMIN_SUCCESS,
     ADD_CONTACT_ADMIN_FAIL,
+    GET_CONTACT_QUERIES_REQUEST,
+    GET_CONTACT_QUERIES_SUCCESS,
+    GET_CONTACT_QUERIES_FAIL,
+    QUERIES_RESOLVED_REQUEST,
+    QUERIES_RESOLVED_SUCCESS,
+    QUERIES_RESOLVED_FAIL,
 } from '../Constants/ContactConstants';
 import axios from 'axios';
 import baseUrl from '../helper';
@@ -18,7 +24,7 @@ export const getContact = () => async (dispatch) => {
 
         dispatch({ type: GET_ADMIN_CONTACT_SUCCESS, payload: data });
     } catch (error) {
-        dispatch({ type: GET_ADMIN_CONTACT_FAIL, payload: error.response.data.message });   
+        dispatch({ type: GET_ADMIN_CONTACT_FAIL, payload: error.response?.data?.message });   
     }
 }
 
@@ -40,8 +46,40 @@ export const createContact = (HeaderData) => async(dispatch) =>{
     } catch (error) {
         dispatch({
             type: ADD_CONTACT_ADMIN_FAIL,
-            payload: error.response?.data.message,
+            payload: error.response?.data?.message,
         });
+    }
+}
+
+export const getContactQueries = () => async (dispatch) => {
+    try {
+        dispatch({ type: GET_CONTACT_QUERIES_REQUEST });
+
+        const { data } = await axios.get(`${baseUrl}/api/v1/admin/get-contactUs`);
+
+        dispatch({ type: GET_CONTACT_QUERIES_SUCCESS, payload: data });
+    } catch (error) {
+        dispatch({ type: GET_CONTACT_QUERIES_FAIL, payload: error.response?.data?.message });   
+        console.log("PRoblem", error)
+    }
+}
+
+export const queriseResolve = (id) => async (dispatch) => {
+    try {
+        dispatch({ type: QUERIES_RESOLVED_REQUEST });
+
+        const { data } = await axios.put(`${baseUrl}/api/v1/admin/queries/resolve/${id}`, { withCredentials: true });
+
+        dispatch({
+            type: QUERIES_RESOLVED_SUCCESS,
+            payload: data.success,
+        });
+
+    } catch (error) {
+        dispatch({
+            type: QUERIES_RESOLVED_FAIL,
+            payload: error.response?.data?.message,
+        })
     }
 }
 

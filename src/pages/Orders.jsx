@@ -10,6 +10,7 @@ import { UPDATE_ADMIN_ORDER_RESET } from '../Constants/OrderConstants';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
 import BlockIcon from '@mui/icons-material/Block';
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
+import Loader from '../components/Loader';
 
 
 const Orders = () => {
@@ -20,15 +21,21 @@ const Orders = () => {
 
     const { orders, error, loading } = useSelector((state) => state.adminOrders);
 
-    const { error: updateError, isUpdated } = useSelector((state) => state.order);
+    const { error: updateError, isUpdated, loading: updateLoading } = useSelector((state) => state.order);
+
+
 
     useEffect(() => {
         if (error) {
             alert(error);
             dispatch(clearErrors());
         }
+        if(updateError){
+            window.alert(updateError);
+            dispatch(clearErrors());
+        }
         dispatch(getOrder(duration));
-    }, [dispatch, error, duration]);
+    }, [dispatch, error, duration, updateError]);
 
     const [showEditForm, setShowEditForm] = useState(false);
     const [selectedOrder, setSelectedOrder] = useState(null);
@@ -39,7 +46,7 @@ const Orders = () => {
             alert("Order status updated successfully");
             dispatch(getOrder());  // Refresh orders list after update
             dispatch({ type: UPDATE_ADMIN_ORDER_RESET });
-            handleCloseEditForm(); // Close modal
+            // handleCloseEditForm(); // Close modal
         }
     }, [dispatch, isUpdated]);
 
@@ -62,6 +69,7 @@ const Orders = () => {
         e.preventDefault();
         if (selectedOrder && orderStatus) {
             dispatch(updateOrder(selectedOrder._id, { status: orderStatus }));
+            handleCloseEditForm();
         }
     };
 
@@ -83,28 +91,28 @@ const Orders = () => {
 
         // Reverse the data rows
         let totalAmount = 0; // Initialize total amount
-    const rows = orders
-        .slice()
-        .reverse() // Reverse the array for most recent orders first
-        .map((order) => {
-            totalAmount += order.totalPrice || 0; // Add each order's totalPrice to the total amount
+        const rows = orders
+            .slice()
+            .reverse() // Reverse the array for most recent orders first
+            .map((order) => {
+                totalAmount += order.totalPrice || 0; // Add each order's totalPrice to the total amount
 
-            return [
-                order._id || "N/A",
-                `${order.shippingInfo?.firstName || "N/A"} ${order.shippingInfo?.lastName || "N/A"}, 
+                return [
+                    order._id || "N/A",
+                    `${order.shippingInfo?.firstName || "N/A"} ${order.shippingInfo?.lastName || "N/A"}, 
                 ${order.shippingInfo?.address || "N/A"}, ${order.shippingInfo?.city || "N/A"}, 
                 ${order.shippingInfo?.pin || "N/A"}, ${order.shippingInfo?.state || "N/A"}, 
                 ${order.shippingInfo?.country || "N/A"}, Phone: ${order.shippingInfo?.phone || "N/A"}, 
                 Email: ${order.shippingInfo?.email || "N/A"}`,
-                order.orderItems.map(item => `${item.name} (Qty: ${item.quantity})`).join("; ") || "N/A",
-                order.totalPrice || "N/A",
-                new Date(order.paidAt).toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }),
-                order.orderStatus || "N/A",
-            ];
-        });
+                    order.orderItems.map(item => `${item.name} (Qty: ${item.quantity})`).join("; ") || "N/A",
+                    order.totalPrice || "N/A",
+                    new Date(order.paidAt).toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }),
+                    order.orderStatus || "N/A",
+                ];
+            });
 
-    // Add a row for the total amount
-    rows.push(["", "", "", `Total Amount: ${totalAmount}`, "", ""]);
+        // Add a row for the total amount
+        rows.push(["", "", "", `Total Amount: ${totalAmount}`, "", ""]);
 
         // Combine header and rows into a CSV string
         const csvContent =
@@ -130,6 +138,7 @@ const Orders = () => {
 
     return (
         <>
+            {updateLoading && <Loader />}
             <div className="cardbox">
                 <h3>Orders List</h3>
                 <Container>
