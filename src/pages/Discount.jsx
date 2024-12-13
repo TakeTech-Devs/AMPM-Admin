@@ -240,7 +240,7 @@ const Discount = () => {
                                 <Form.Control
                                     type="number"
                                     name="numberOfCoupon"
-                                    placeholder="Number of Coupone"
+                                    placeholder="Number of Coupon"
                                     value={formData.numberOfCoupon}
                                     onChange={handleChange}
                                 />
