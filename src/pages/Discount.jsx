@@ -25,20 +25,33 @@ const Discount = () => {
     }
 
     const showApproveAlert = (id) => {
+        const selectedCoupon = discountCoupon.find((coupon) => coupon._id === id);
+    
+        if (selectedCoupon && selectedCoupon.numberOfCoupon === 0) {
+            Swal.fire({
+                title: 'Cannot Activate',
+                text: 'This coupon cannot be activated as the number of coupons is 0.',
+                icon: 'error',
+                confirmButtonColor: '#d33',
+                confirmButtonText: 'Okay'
+            });
+            return; // Prevent further execution
+        }
+    
         Swal.fire({
             title: 'Are you sure?',
-            text: 'Do you want to active this coupon?',
+            text: 'Do you want to activate this coupon?',
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, active it!'
+            confirmButtonText: 'Yes, activate it!'
         }).then((result) => {
             if (result.isConfirmed) {
                 approveCouponHandler(id); // Call the function here if confirmed
                 Swal.fire(
-                    'Activet!',
-                    'The coupon has been actived successfully.',
+                    'Activated!',
+                    'The coupon has been activated successfully.',
                     'success'
                 ).then(() => {
                     window.location.reload(); // Reload the page after clicking OK
@@ -46,6 +59,7 @@ const Discount = () => {
             }
         });
     };
+    
 
     const showAlert = (id) => {
         Swal.fire({
@@ -102,6 +116,7 @@ const Discount = () => {
         code: '',
         discountType: 'percentage',
         discountValue: '',
+        numberOfCoupon: '',
         minPurchaseAmount: '',
         expiryDate: '',
     });
@@ -224,6 +239,15 @@ const Discount = () => {
                             <Col lg={12}>
                                 <Form.Control
                                     type="number"
+                                    name="numberOfCoupon"
+                                    placeholder="Number of Coupone"
+                                    value={formData.numberOfCoupon}
+                                    onChange={handleChange}
+                                />
+                            </Col>
+                            <Col lg={12}>
+                                <Form.Control
+                                    type="number"
                                     name="minPurchaseAmount"
                                     placeholder="Minimum Purchase Amount"
                                     value={formData.minPurchaseAmount}
@@ -259,6 +283,7 @@ const Discount = () => {
                             <th>Discount Code</th>
                             <th>Discount Type</th>
                             <th>Discount Value</th>
+                            <th>Number Of Coupon</th>
                             <th>Minimum Purchase Amount</th>
                             <th>Expiry Date</th>
                             <th>isActive</th>
@@ -272,6 +297,7 @@ const Discount = () => {
                                         <td>{item.code || "N/A"}</td>
                                         <td>{item.discountType || "N/A"}</td>
                                         <td>{item.discountValue ? item.discountValue.toString() : "N/A"}{item.discountType == 'percentage' ? '%' : '/-'}</td>
+                                        <td>{item.numberOfCoupon === null ? 'Infinity' : item.numberOfCoupon}</td>
                                         <td>{item.minPurchaseAmount ? item.minPurchaseAmount.toString() : "N/A"}/-</td>
                                         <td>{new Date(item.expiryDate).toLocaleString("en-IN", { timeZone: "Asia/Kolkata" })}</td>
                                         <td>
